@@ -1,0 +1,40 @@
+:root {
+    /* Colors */
+    --primary: #4F46E5;
+    --secondary: #64748B;
+    --tertiary: #F8FAFC;
+    --neutral: #777681;
+    --white: #FFFFFF;
+    --black: #111827;
+
+    /* Typography */
+    --font-family: "Inter", sans-serif;
+
+    /* Font sizes */
+    --text-xs: 12px;
+    --text-sm: 14px;
+    --text-md: 16px;
+    --text-lg: 18px;
+    --text-xl: 24px;
+    --text-xxl: 32px;
+
+    /* Font weights */
+    --font-light: 300;
+    --font-regular: 400;
+    --font-medium: 500;
+    --font-semibold: 600;
+    --font-bold: 700;
+
+    /* Border radius */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+
+    /* Spacing */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-xxl: 48px;
+}

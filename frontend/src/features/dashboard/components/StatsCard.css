@@ -1,0 +1,52 @@
+.stats-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.stats-card {
+  background: #D0E1FB;
+  padding: 20px;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 180px;      /* fix width */
+  height: 140px;      /* fix height, square jaisa look */
+  flex: 0 0 auto;      /* stretch hone se rokta hai */
+}
+
+.stats-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.stats-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stats-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #777587;
+  margin-bottom: 10px;
+}
+.stats-card p {
+  font-size: 40px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.stats-card-icon {
+  font-size: 60px;
+  color: #54647A;
+  margin-right:10px;
+  margin-bottom:10px;
+  margin-top:37px;
+}
