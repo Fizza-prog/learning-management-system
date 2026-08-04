@@ -2,6 +2,7 @@ const {
   registerUser,
   loginUser,
   refreshAccessToken,
+  logoutUser,
 } = require("../services/authService");
 
 const register = async (req, res) => {
@@ -71,9 +72,28 @@ const refreshToken = async (req, res) => {
   }
 };
 
+const logout = async (req, res) => {
+  try {
+    await logoutUser(req.body.refreshToken);
+
+    res.status(200).json({
+      success: true,
+      message: "Logged out successfully.",
+    });
+
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+
 module.exports = {
   register,
   login,
   getProfile,
   refreshToken,
+  logout,
 };

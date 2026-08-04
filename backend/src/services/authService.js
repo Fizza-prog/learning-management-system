@@ -105,8 +105,31 @@ const refreshAccessToken = async (token) => {
   };
 };
 
+const logoutUser = async (token) => {
+  if (!token) {
+    throw new Error("Refresh token required.");
+  }
+
+  const user = await User.findOne({
+    where: {
+      refreshToken: token,
+    },
+  });
+
+  if (!user) {
+    throw new Error("Invalid refresh token.");
+  }
+
+  await user.update({
+    refreshToken: null,
+  });
+
+  return true;
+};
+
 module.exports = {
   registerUser,
   loginUser,
   refreshAccessToken,
+  logoutUser,
 };

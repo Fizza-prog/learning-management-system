@@ -5,6 +5,7 @@ const {
   login,
   getProfile,
   refreshToken,
+  logout
 } = require("../controllers/authController");
 
 const protect = require("../middleware/authMiddleware");
@@ -21,4 +22,8 @@ router.get(
   getProfile
 );
 router.post("/refresh-token", refreshToken);
+router.post("/logout", logout);
+
+
+
 module.exports = router;
