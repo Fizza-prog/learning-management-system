@@ -1,3 +1,4 @@
+const authorize = require("../middleware/roleMiddleware");
 const express = require("express");
 const {
   register,
@@ -12,5 +13,11 @@ const router = express.Router();
 router.post("/register", register);
 router.post("/login", login);
 router.get("/profile", protect, getProfile);
+router.get(
+  "/admin",
+  protect,
+  authorize("admin"),
+  getProfile
+);
 
 module.exports = router;
