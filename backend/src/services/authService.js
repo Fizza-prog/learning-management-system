@@ -7,6 +7,7 @@ const {
 } = require("../utils/generateToken");
 const crypto = require("crypto");
 const sanitizeUser = require("../utils/sanitizeUser");
+const sendEmail = require("../utils/sendEmail");
 
 const registerUser = async (userData) => {
   const {
@@ -138,7 +139,9 @@ const forgotPasswordService = async (email) => {
     throw new Error("User not found.");
   }
 
-  const resetToken = crypto.randomBytes(32).toString("hex");
+  const resetToken = crypto.randomBytes(32).toString(
+    "hex"
+  );
 
   const resetTokenExpiry = new Date(
     Date.now() + 10 * 60 * 1000
@@ -149,7 +152,23 @@ const forgotPasswordService = async (email) => {
     resetPasswordExpiry: resetTokenExpiry,
   });
 
-  return resetToken;
+  const resetLink = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
+
+  const message = `
+Click the link below to reset your password:
+
+${resetLink}
+
+This link will expire in 10 minutes.
+`;
+
+  await sendEmail(
+    user.email,
+    "Password Reset Request",
+    message
+  );
+
+  return "Password reset email sent successfully.";
 };
 
 const resetPasswordService = async (token, newPassword) => {
