@@ -4,6 +4,7 @@ const {
   register,
   login,
   getProfile,
+  refreshToken,
 } = require("../controllers/authController");
 
 const protect = require("../middleware/authMiddleware");
@@ -19,5 +20,5 @@ router.get(
   authorize("admin"),
   getProfile
 );
-
+router.post("/refresh-token", refreshToken);
 module.exports = router;

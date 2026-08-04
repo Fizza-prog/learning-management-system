@@ -1,6 +1,10 @@
 const bcrypt = require("bcryptjs");
 const User = require("../models/User");
-const generateToken = require("../utils/generateToken");
+const jwt = require("jsonwebtoken");
+const {
+  generateAccessToken,
+  generateRefreshToken,
+} = require("../utils/generateToken");
 
 const registerUser = async (userData) => {
   const {
@@ -54,15 +58,55 @@ const loginUser = async (userData) => {
     throw new Error("Invalid credentials.");
   }
 
-  const token = generateToken(user);
+  const accessToken = generateAccessToken(user);
+
+const refreshToken = generateRefreshToken(user);
+
+await user.update({
+  refreshToken,
+});
+
+return {
+  user,
+  accessToken,
+  refreshToken,
+};
+};
+
+const refreshAccessToken = async (token) => {
+  if (!token) {
+    throw new Error("Refresh token required.");
+  }
+
+  const user = await User.findOne({
+    where: {
+      refreshToken: token,
+    },
+  });
+
+  if (!user) {
+    throw new Error("Invalid refresh token.");
+  }
+
+  jwt.verify(
+    token,
+    process.env.JWT_REFRESH_SECRET,
+    (error) => {
+      if (error) {
+        throw new Error("Refresh token expired.");
+      }
+    }
+  );
+
+  const accessToken = generateAccessToken(user);
 
   return {
-    user,
-    token,
+    accessToken,
   };
 };
 
 module.exports = {
   registerUser,
   loginUser,
+  refreshAccessToken,
 };

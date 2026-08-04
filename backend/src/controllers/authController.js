@@ -1,6 +1,7 @@
 const {
   registerUser,
   loginUser,
+  refreshAccessToken,
 } = require("../services/authService");
 
 const register = async (req, res) => {
@@ -51,8 +52,28 @@ const getProfile = async (req, res) => {
   }
 };
 
+const refreshToken = async (req, res) => {
+  try {
+    const result = await refreshAccessToken(
+      req.body.refreshToken
+    );
+
+    res.status(200).json({
+      success: true,
+      data: result,
+    });
+
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   register,
   login,
   getProfile,
+  refreshToken,
 };

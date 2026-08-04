@@ -38,6 +38,12 @@ const User = sequelize.define("User", {
     ),
     defaultValue: "student",
   },
+
+  refreshToken: {
+  type: DataTypes.TEXT,
+  allowNull: true,
+},
+
 });
 
 module.exports = User;
