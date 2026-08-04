@@ -5,6 +5,7 @@ const {
   generateAccessToken,
   generateRefreshToken,
 } = require("../utils/generateToken");
+const crypto = require("crypto");
 
 const registerUser = async (userData) => {
   const {
@@ -127,9 +128,63 @@ const logoutUser = async (token) => {
   return true;
 };
 
+const forgotPasswordService = async (email) => {
+  const user = await User.findOne({
+    where: { email },
+  });
+
+  if (!user) {
+    throw new Error("User not found.");
+  }
+
+  const resetToken = crypto.randomBytes(32).toString("hex");
+
+  const resetTokenExpiry = new Date(
+    Date.now() + 10 * 60 * 1000
+  );
+
+  await user.update({
+    resetPasswordToken: resetToken,
+    resetPasswordExpiry: resetTokenExpiry,
+  });
+
+  return resetToken;
+};
+
+const resetPasswordService = async (token, newPassword) => {
+  const user = await User.findOne({
+    where: {
+      resetPasswordToken: token,
+    },
+  });
+
+  if (!user) {
+    throw new Error("Invalid reset token.");
+  }
+
+  if (user.resetPasswordExpiry < new Date()) {
+    throw new Error("Reset token expired.");
+  }
+
+  const hashedPassword = await bcrypt.hash(
+    newPassword,
+    10
+  );
+
+  await user.update({
+    password: hashedPassword,
+    resetPasswordToken: null,
+    resetPasswordExpiry: null,
+  });
+
+  return "Password reset successfully.";
+};
+
 module.exports = {
   registerUser,
   loginUser,
   refreshAccessToken,
   logoutUser,
+  forgotPasswordService,
+  resetPasswordService,
 };

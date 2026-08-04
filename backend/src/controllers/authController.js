@@ -3,6 +3,8 @@ const {
   loginUser,
   refreshAccessToken,
   logoutUser,
+  forgotPasswordService,
+  resetPasswordService,
 } = require("../services/authService");
 
 const register = async (req, res) => {
@@ -88,7 +90,44 @@ const logout = async (req, res) => {
     });
   }
 };
+const forgotPassword = async (req, res) => {
+  try {
+    const result = await forgotPasswordService(
+      req.body.email
+    );
 
+    res.status(200).json({
+      success: true,
+      message: result,
+    });
+
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+const resetPassword = async (req, res) => {
+  try {
+    const result = await resetPasswordService(
+      req.params.token,
+      req.body.password
+    );
+
+    res.status(200).json({
+      success: true,
+      message: result,
+    });
+
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
 
 module.exports = {
   register,
@@ -96,4 +135,7 @@ module.exports = {
   getProfile,
   refreshToken,
   logout,
+  forgotPassword,
+  resetPassword,
 };
+  
