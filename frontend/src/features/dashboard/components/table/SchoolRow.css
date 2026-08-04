@@ -1,0 +1,29 @@
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.status-active {
+  background: #d1fae5;
+  color: #047857;
+}
+
+.status-pending {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.status-suspended {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.table-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.table-actions button {
+  cursor: pointer;
+}

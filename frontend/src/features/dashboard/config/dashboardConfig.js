@@ -1,214 +1,112 @@
-export const dashboardConfig = {
-  super_admin: {
-    menu: [
-      {
-        label: "Dashboard",
-        path: "/dashboard",
-        icon: "dashboard",
-      },
-      {
-        label: "Schools",
-        path: "/schools",
-        icon: "schools",
-      },
-      {
-        label: "Admins",
-        path: "/admins",
-        icon: "admins",
-      },
-      {
-        label: "Subscriptions",
-        path: "/subscriptions",
-        icon: "subscriptions",
-      },
-      {
-        label: "System Settings",
-        path: "/settings",
-        icon: "settings",
-      },
-    ],
+export const sidebarMenu = [
+  {
+    id: 1,
+    title: "Dashboard",
+    path: "/dashboard",
+    icon: "dashboard",
+  },
+  {
+    id: 2,
+    title: "Schools",
+    path: "/schools",
+    icon: "school",
+  },
+  {
+    id: 3,
+    title: "Billing",
+    path: "/billing",
+    icon: "billing",
+  },
+  {
+    id: 4,
+    title: "System Users",
+    path: "/users",
+    icon: "users",
+  },
+  {
+    id: 5,
+    title: "Settings",
+    path: "/settings",
+    icon: "settings",
+  },
+  {
+    id: 6,
+    title: "Logs",
+    path: "/logs",
+    icon: "logs",
+  },
+];
 
-    stats: [
-      {
-        title: "Total Schools",
-        value: "150",
-      },
-      {
-        title: "Total Users",
-        value: "15000",
-      },
-    ],
 
-    activities: [
-      "New school registered",
-      "Admin account created",
-      "Subscription updated",
-    ],
+export const statsData = [
+  {
+    id:1,
+    title:"Total Schools",
+    value:"124",
+    growth:"+12%",
+    icon:"school",
   },
 
-  admin: {
-    menu: [
-      {
-        label: "Dashboard",
-        path: "/dashboard",
-        icon: "dashboard",
-      },
-      {
-        label: "Students",
-        path: "/students",
-        icon: "students",
-      },
-      {
-        label: "Teachers",
-        path: "/teachers",
-        icon: "teachers",
-      },
-      {
-        label: "Attendance",
-        path: "/attendance",
-        icon: "attendance",
-      },
-      {
-        label: "Fees",
-        path: "/fees",
-        icon: "fees",
-      },
-      {
-        label: "Timetable",
-        path: "/timetable",
-        icon: "timetable",
-      },
-      {
-        label: "Grades",
-        path: "/grades",
-        icon: "grades",
-      },
-      {
-        label: "Announcements",
-        path: "/announcements",
-        icon: "announcements",
-      },
-    ],
-
-    stats: [
-      {
-        title: "Total Students",
-        value: "1200",
-      },
-      {
-        title: "Total Teachers",
-        value: "85",
-      },
-      {
-        title: "Attendance",
-        value: "92%",
-      },
-      {
-        title: "Pending Fees",
-        value: "$25,000",
-      },
-    ],
-
-    activities: [
-      "New student added",
-      "Teacher assigned to class",
-      "Fee report generated",
-    ],
+  {
+    id:2,
+    title:"Active Students",
+    value:"18,245",
+    growth:"+8%",
+    icon:"students",
   },
 
-  teacher: {
-    menu: [
-      {
-        label: "Dashboard",
-        path: "/dashboard",
-        icon: "dashboard",
-      },
-      {
-        label: "My Classes",
-        path: "/classes",
-        icon: "classes",
-      },
-      {
-        label: "Attendance",
-        path: "/attendance",
-        icon: "attendance",
-      },
-      {
-        label: "Grades",
-        path: "/grades",
-        icon: "grades",
-      },
-      {
-        label: "Announcements",
-        path: "/announcements",
-        icon: "announcements",
-      },
-    ],
-
-    stats: [
-      {
-        title: "My Classes",
-        value: "5",
-      },
-      {
-        title: "Students",
-        value: "180",
-      },
-    ],
-
-    activities: [
-      "Attendance marked",
-      "Grades updated",
-      "Assignment uploaded",
-    ],
+  {
+    id:3,
+    title:"Monthly Revenue",
+    value:"$82K",
+    growth:"+15%",
+    icon:"revenue",
   },
 
-  students: {
-    menu: [
-      {
-        label: "Dashboard",
-        path: "/dashboard",
-        icon: "dashboard",
-      },
-      {
-        label: "My Courses",
-        path: "/courses",
-        icon: "courses",
-      },
-      {
-        label: "Timetable",
-        path: "/timetable",
-        icon: "timetable",
-      },
-      {
-        label: "Grades",
-        path: "/grades",
-        icon: "grades",
-      },
-      {
-        label: "Fees",
-        path: "/fees",
-        icon: "fees",
-      },
-    ],
-
-    stats: [
-      {
-        title: "Attendance",
-        value: "95%",
-        icon: "attendance",
-      },
-      {
-        title: "GPA",
-        value: "3.8",
-        icon: "grade",
-      },
-    ],
-
-    activities: [
-      "New assignment received",
-      "Result published",
-      "Timetable updated",
-    ],
+  {
+    id:4,
+    title:"Pending Approvals",
+    value:"12",
+    growth:"-2%",
+    icon:"approval",
   },
-};
+];
+
+export const recentSchools = [
+  {
+    id: 1,
+    school: "ABC Public School",
+    admin: "Ali Khan",
+    students: 520,
+    plan: "Premium",
+    status: "Active",
+    createdAt: "01 Aug 2026",
+  },
+  {
+    id: 2,
+    school: "City High School",
+    admin: "Sara Noor",
+    students: 410,
+    plan: "Standard",
+    status: "Pending",
+    createdAt: "03 Aug 2026",
+  },
+  {
+    id: 3,
+    school: "Future Academy",
+    admin: "Ahmed Ali",
+    students: 310,
+    plan: "Premium",
+    status: "Suspended",
+    createdAt: "05 Aug 2026",
+  },
+  {
+    id: 4,
+    school: "Bright Star School",
+    admin: "Fatima Hassan",
+    students: 275,
+    plan: "Basic",
+    status: "Active",
+    createdAt: "08 Aug 2026",
+  },
+];
