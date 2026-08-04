@@ -6,6 +6,7 @@ const {
   generateRefreshToken,
 } = require("../utils/generateToken");
 const crypto = require("crypto");
+const sanitizeUser = require("../utils/sanitizeUser");
 
 const registerUser = async (userData) => {
   const {
@@ -36,7 +37,7 @@ const registerUser = async (userData) => {
     role,
   });
 
-  return user;
+  return sanitizeUser(user);
 };
 
 const loginUser = async (userData) => {
@@ -68,7 +69,7 @@ await user.update({
 });
 
 return {
-  user,
+  user: sanitizeUser(user),
   accessToken,
   refreshToken,
 };
