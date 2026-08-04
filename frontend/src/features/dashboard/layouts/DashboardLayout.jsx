@@ -1,22 +1,26 @@
+import DashboardBody from "../components/body/DashboardBody";
 import DashboardHeader from "../components/header/DashboardHeader";
 import Sidebar from "../components/sidebar/Sidebar";
 import StatsGrid from "../components/stats/StatsGrid";
-import RecentSchools from "../components/table/RecentSchools";
 import Topbar from "../components/topbar/Topbar";
 import './DashboardLayout.css'
 
-function DashboardLayout() {
+function DashboardLayout({
+  children,
+  menu,
+  role,
+}) {
   return (
     <div className="dashboard-layout">
-     <Sidebar/>
+     <Sidebar menu={menu} role={role}/>
 
       <div className="dashboard-main">
        <Topbar/>
 
         <main className="dashboard-content">
-          <DashboardHeader/>
-          <StatsGrid/>
-          <RecentSchools/>
+         
+        
+          {children}
         </main>
       </div>
     </div>

@@ -1,10 +1,9 @@
 import StatsCard from "./StatsCard";
-import { statsData } from "../../config/dashboardConfig";
 import "./StatsGrid.css";
-function StatsGrid() {
+function StatsGrid({ stats }) {
   return (
     <section className="stats-grid">
-      {statsData.map((item) => (
+      {stats.map((item) => (
         <StatsCard
           key={item.id}
           title={item.title}

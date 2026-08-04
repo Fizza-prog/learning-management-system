@@ -3,9 +3,11 @@ import LandingPage from "../pages/LandingPage";
 import Login from "../features/auth/pages/Login";
 import Signup from "../features/auth/pages/Signup";
 import ForgotPassword from "../features/auth/pages/ForgotPassword";
-import Dashboard from "../features/dashboard/pages/Dashboard";import MainLayout from "../layouts/MainLayout";
+import SuperAdminDashboard from "../features/dashboard/pages/SuperAdminDashboard";
+import MainLayout from "../layouts/MainLayout";
 import ProtectedRoute from "./ProtectedRoute";
 import RoleGuard from "./roleGuard";
+import DashboardRouter from "../features/dashboard/DashboardRouter";
 function AppRoutes() {
   return (
     <Routes>
@@ -29,7 +31,8 @@ function AppRoutes() {
     />
   }>
 
-    <Route path="/dashboard" element={<Dashboard />} />
+    <Route path="/dashboard" element={<DashboardRouter />} />
+    
 
   </Route>
 

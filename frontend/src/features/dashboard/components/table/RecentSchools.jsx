@@ -1,7 +1,6 @@
-import { recentSchools } from "../../config/dashboardConfig";
 import SchoolRow from "./SchoolRow";
 import "./RecentSchools.css";
-function RecentSchools() {
+function RecentSchools({ schools }) {
   return (
     <section className="recent-schools">
       <h2 className="recent-schools-title">
@@ -22,7 +21,7 @@ function RecentSchools() {
         </thead>
 
         <tbody>
-          {recentSchools.map((school) => (
+          {schools.map((school) => (
             <SchoolRow
               key={school.id}
               school={school}

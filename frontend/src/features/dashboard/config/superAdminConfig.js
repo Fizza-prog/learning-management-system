@@ -1,4 +1,5 @@
-export const sidebarMenu = [
+// Sidebar Menu
+export const superAdminMenu = [
   {
     id: 1,
     title: "Dashboard",
@@ -37,42 +38,40 @@ export const sidebarMenu = [
   },
 ];
 
-
-export const statsData = [
+// Statistics Cards
+export const superAdminStats = [
   {
-    id:1,
-    title:"Total Schools",
-    value:"124",
-    growth:"+12%",
-    icon:"school",
+    id: 1,
+    title: "Total Schools",
+    value: "124",
+    growth: "+12%",
+    icon: "school",
   },
-
   {
-    id:2,
-    title:"Active Students",
-    value:"18,245",
-    growth:"+8%",
-    icon:"students",
+    id: 2,
+    title: "Active Students",
+    value: "18,245",
+    growth: "+8%",
+    icon: "students",
   },
-
   {
-    id:3,
-    title:"Monthly Revenue",
-    value:"$82K",
-    growth:"+15%",
-    icon:"revenue",
+    id: 3,
+    title: "Monthly Revenue",
+    value: "$82K",
+    growth: "+15%",
+    icon: "revenue",
   },
-
   {
-    id:4,
-    title:"Pending Approvals",
-    value:"12",
-    growth:"-2%",
-    icon:"approval",
+    id: 4,
+    title: "Pending Approvals",
+    value: "12",
+    growth: "-2%",
+    icon: "approval",
   },
 ];
 
-export const recentSchools = [
+// Recent Schools Table
+export const superAdminRecentSchools = [
   {
     id: 1,
     school: "ABC Public School",
@@ -109,4 +108,15 @@ export const recentSchools = [
     status: "Active",
     createdAt: "08 Aug 2026",
   },
+];
+
+// Chart Data
+export const superAdminTenantGrowth = [
+  { month: "Jan", schools: 15 },
+  { month: "Feb", schools: 22 },
+  { month: "Mar", schools: 28 },
+  { month: "Apr", schools: 35 },
+  { month: "May", schools: 42 },
+  { month: "Jun", schools: 50 },
+  { month: "Jul", schools: 58 },
 ];

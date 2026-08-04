@@ -3,6 +3,9 @@ import {
   MdGroups,
   MdAttachMoney,
   MdPendingActions,
+  MdPerson,
+  MdFactCheck,
+  MdPayments,
 } from "react-icons/md";
 import "./StatsCard.css";
 
@@ -11,10 +14,14 @@ const iconMap = {
   students: MdGroups,
   revenue: MdAttachMoney,
   approval: MdPendingActions,
+
+  teachers: MdPerson,
+  attendance: MdFactCheck,
+  fees: MdPayments,
 };
 
 function StatsCard({ title, value, growth, icon }) {
-  const Icon = iconMap[icon];
+ const Icon = iconMap[icon] || MdSchool;
   const isPositive = growth.startsWith("+");
 
   return (
