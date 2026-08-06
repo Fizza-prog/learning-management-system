@@ -4,6 +4,7 @@ import {
   MdAccountCircle,
 } from "react-icons/md";
 import './Topbar.css'
+import ProfileDropdown from "./ProfileDropdown";
 
 function Topbar() {
   return (
@@ -26,7 +27,7 @@ function Topbar() {
         </button>
 
         <div className="topbar-user">
-          <MdAccountCircle className="user-icon" />
+           <ProfileDropdown/>
         </div>
       </div>
     </header>

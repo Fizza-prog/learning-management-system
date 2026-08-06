@@ -1,8 +1,9 @@
 import { useState } from "react";
 import AuthInput from "../components/AuthInput";
 import { validateForgotPassword } from "../services/validation";
-import {MdEmail} from "react-icons/md";
-
+import { forgotPassword } from "../../../api/authApi";
+import { MdEmail } from "react-icons/md";
+import { toast } from "react-toastify";
 
 function ForgotPassword() {
   const [formData, setFormData] = useState({
@@ -10,70 +11,86 @@ function ForgotPassword() {
   });
 
   const [errors, setErrors] = useState({});
-  const [message, setMessage] = useState("");
 
   function handleChange(event) {
     const { name, value } = event.target;
 
-    setFormData((prevData) => ({
-      ...prevData,
+    setFormData((prev) => ({
+      ...prev,
       [name]: value,
     }));
 
-    setErrors((prevErrors) => ({
-      ...prevErrors,
+    setErrors((prev) => ({
+      ...prev,
       [name]: "",
     }));
 
-    setMessage("");
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
-    const validationErrors = validateForgotPassword(formData);
+    const validationErrors =
+      validateForgotPassword(formData);
 
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
+
+      const firstError = Object.values(validationErrors)[0];
+      toast.error(firstError);
+
       return;
     }
 
     setErrors({});
 
-    // Backend integration will come later
-    setMessage(
-      "If an account with this email exists, a password reset link has been sent."
-    );
+    try {
+      const response = await forgotPassword(
+        formData.email
+      );
 
-    console.log("Forgot Password:", formData);
+      toast.success(response.message);
+    } catch (error) {
+      console.error(error);
+
+      toast.error(
+        error.response?.data?.message ||
+        "Something went wrong."
+      );
+    }}
+
+    return (
+      <div className="auth-page">
+        <div className="auth-card">
+          <h1>Forgot Password</h1>
+
+          <p>
+            Enter your email to receive a password
+            reset link.
+          </p>
+
+          <form
+            className="auth-form"
+            onSubmit={handleSubmit}
+          >
+            <AuthInput
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+              error={errors.email}
+              icon={<MdEmail />}
+            />
+
+            <button type="submit">
+              Send Reset Link
+            </button>
+          </form>
+
+        </div>
+      </div>
+    );
   }
 
-  return (
-    <div className="auth-page">
-      <div className="auth-card">
-        <h1>Forgot Password</h1>
-        <p>Enter your email to receive a password reset link.</p>
-
-        <form className="auth-form" onSubmit={handleSubmit}>
-          <AuthInput
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={formData.email}
-            icon={<MdEmail/>}
-            onChange={handleChange}
-            error={errors.email}
-          />
-
-          <button type="submit">
-            Send Reset Link
-          </button>
-        </form>
-
-        {message && <p className="success-text">{message}</p>}
-      </div>
-    </div>
-  );
-}
-
-export default ForgotPassword;
+  export default ForgotPassword;

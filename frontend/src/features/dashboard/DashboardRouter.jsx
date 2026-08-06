@@ -8,7 +8,7 @@ function DashboardRouter() {
     case "super_admin":
       return <SuperAdminDashboard />;
 
-    case "school_admin":
+    case "admin":
       return <SchoolAdminDashboard />;
 
     default:

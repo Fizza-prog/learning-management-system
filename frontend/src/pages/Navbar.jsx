@@ -1,9 +1,14 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import {HashLink} from "react-router-hash-link"
+import { HashLink } from "react-router-hash-link";
+import { FaGraduationCap, FaBars, FaTimes } from "react-icons/fa";
 import "./Navbar.css";
-import { FaGraduationCap } from "react-icons/fa";
 
 function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const closeMenu = () => setMenuOpen(false);
+
   return (
     <header className="navbar">
       <div className="navbar-container">
@@ -11,48 +16,59 @@ function Navbar() {
         {/* Logo */}
         <div className="logo">
           <FaGraduationCap className="logo-icon" />
-          <Link to="/">
+          <Link to="/" onClick={closeMenu}>
             EduLMS
           </Link>
         </div>
 
-        {/* Navigation Links */}
-        <nav>
+        {/* Hamburger */}
+        <div
+          className="menu-icon"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          {menuOpen ? <FaTimes /> : <FaBars />}
+        </div>
+
+        {/* Navigation */}
+        <nav className={menuOpen ? "nav-menu active" : "nav-menu"}>
           <ul className="nav-links">
+
             <li>
-              <HashLink to="/#features">
+              <HashLink smooth to="/#features" onClick={closeMenu}>
                 Features
               </HashLink>
             </li>
 
             <li>
-              <HashLink to="/#how-it-works">
+              <HashLink smooth to="/#how-it-works" onClick={closeMenu}>
                 How It Works
               </HashLink>
             </li>
 
             <li>
-              <HashLink to="/#why-us">
+              <HashLink smooth to="/#why-us" onClick={closeMenu}>
                 Why Choose Us
               </HashLink>
             </li>
+
           </ul>
+
+          <div className="nav-actions">
+
+            <Link to="/login" onClick={closeMenu}>
+              <button className="login-btn">
+                Login
+              </button>
+            </Link>
+
+            <Link to="/signup" onClick={closeMenu}>
+              <button className="primary-btn">
+                Get Started
+              </button>
+            </Link>
+
+          </div>
         </nav>
-
-        {/* Action Buttons */}
-        <div className="nav-actions">
-          <Link to="/login">
-            <button className="login-btn">
-              Login
-            </button>
-          </Link>
-
-          <Link to="/signup">
-            <button className="primary-btn">
-              Get Started
-            </button>
-          </Link>
-        </div>
 
       </div>
     </header>

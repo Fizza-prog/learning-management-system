@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Sidebar.css";
 
 import {
@@ -38,6 +39,8 @@ const iconMap = {
 };
 
 function Sidebar({ menu, role }) {
+    const navigate = useNavigate();
+
   return (
     <aside className="sidebar">
       {/* Logo */}
@@ -70,15 +73,17 @@ function Sidebar({ menu, role }) {
 
       {/* Footer */}
       <div className="sidebar-footer">
-        <button className="sidebar-add-member">
-          <MdPersonAdd className="sidebar-footer-icon" />
-          <span>Add New Member</span>
-        </button>
+        <button
+  className="sidebar-add-member"
+  onClick={() => navigate("/dashboard/add-member")}
+>
+  <MdPersonAdd className="sidebar-footer-icon" />
+  <span>Add New Member</span>
+</button>
+        
+        
 
-        <button className="sidebar-logout">
-          <MdLogout className="sidebar-footer-icon" />
-          <span>Logout</span>
-        </button>
+        
       </div>
     </aside>
   );

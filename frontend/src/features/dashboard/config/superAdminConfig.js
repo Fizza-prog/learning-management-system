@@ -37,6 +37,11 @@ export const superAdminMenu = [
     icon: "logs",
   },
 ];
+export const superAdminHeader = {
+  title: "Overview",
+  subtitle: "Manage schools, subscriptions, and platform operations.",
+  buttonText: "Add School",
+};
 
 // Statistics Cards
 export const superAdminStats = [
