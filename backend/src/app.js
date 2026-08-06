@@ -5,6 +5,8 @@ const dashboardRoutes = require("./routes/dashboardRoutes");
 
 const { connectDB } = require("./config/database");
 const authRoutes = require("./routes/authRoutes");
+const cookieParser = require("cookie-parser");
+
 
 require("./models");
 
@@ -12,7 +14,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-
+app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 

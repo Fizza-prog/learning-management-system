@@ -8,6 +8,9 @@ const {
 const crypto = require("crypto");
 const sanitizeUser = require("../utils/sanitizeUser");
 const sendEmail = require("../utils/sendEmail");
+const verificationEmail = require(
+  "../utils/verificationEmail"
+);
 
 const registerUser = async (userData) => {
   const {
@@ -29,6 +32,11 @@ const registerUser = async (userData) => {
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
+  const verificationToken = crypto.randomBytes(32).toString("hex");
+
+  const verificationExpiry =
+  new Date(Date.now() + 24 * 60 * 60 * 1000);
+
   const user = await User.create({
     schoolId,
     firstName,
@@ -36,7 +44,24 @@ const registerUser = async (userData) => {
     email,
     password: hashedPassword,
     role,
+    isVerified: false,
+    emailVerificationToken: verificationToken,
+    emailVerificationExpiry: verificationExpiry,
   });
+
+    const verificationLink =
+    `${process.env.CLIENT_URL}/verify-email/${verificationToken}`;
+
+    const emailBody = verificationEmail(
+    user.firstName,
+    verificationLink
+   );
+
+  await sendEmail(
+    user.email,
+    "Verify your email",
+    emailBody
+  );
 
   return sanitizeUser(user);
 };
@@ -61,6 +86,10 @@ const loginUser = async (userData) => {
     throw new Error("Invalid credentials.");
   }
 
+  if(!user.isVerified) {
+    throw new Error("Email not verified. Please verify your email before logging in.");
+  }
+
   const accessToken = generateAccessToken(user);
 
 const refreshToken = generateRefreshToken(user);
@@ -70,7 +99,7 @@ await user.update({
 });
 
 return {
-  user: sanitizeUser(user),
+  ...sanitizeUser(user),
   accessToken,
   refreshToken,
 };
@@ -200,6 +229,106 @@ const resetPasswordService = async (token, newPassword) => {
   return "Password reset successfully.";
 };
 
+const verifyEmailService = async (token) => {
+
+  const user = await User.findOne({
+    where: {
+      emailVerificationToken: token,
+    },
+  });
+
+  if (!user) {
+    throw new Error("Invalid verification token.");
+  }
+
+
+  if (user.emailVerificationExpiry < new Date()) {
+    throw new Error("Verification token has expired.");
+  }
+
+
+  user.isVerified = true;
+
+  user.emailVerificationToken = null;
+
+  user.emailVerificationExpiry = null;
+
+
+  await user.save();
+
+
+  return {
+    message: "Email verified successfully.",
+  };
+};
+const resendVerificationEmailService = async (
+  email
+) => {
+  const user = await User.findOne({
+    where: { email },
+  });
+
+  if (!user) {
+    throw new Error("User not found.");
+  }
+
+  if (user.isVerified) {
+    throw new Error(
+      "Email is already verified."
+    );
+  }
+
+  const now = new Date();
+
+  if (
+    user.lastVerificationEmailSent &&
+    now - user.lastVerificationEmailSent <
+      60000
+  ) {
+    throw new Error(
+      "Please wait before requesting another verification email."
+    );
+  }
+
+  const verificationToken = crypto
+    .randomBytes(32)
+    .toString("hex");
+
+  const verificationExpiry = new Date(
+    Date.now() + 24 * 60 * 60 * 1000
+  );
+
+  await user.update({
+    emailVerificationToken:
+      verificationToken,
+
+    emailVerificationExpiry:
+      verificationExpiry,
+  });
+
+  const verificationLink = `${process.env.CLIENT_URL}/verify-email/${verificationToken}`;
+
+  const emailBody = verificationEmail(
+    user.firstName,
+    verificationLink
+  );
+
+  await sendEmail(
+    user.email,
+    "Verify your email",
+    emailBody
+  );
+
+  await user.update({
+    lastVerificationEmailSent:
+      new Date(),
+  });
+
+  return {
+    message:
+      "Verification email sent successfully.",
+  };
+};
 module.exports = {
   registerUser,
   loginUser,
@@ -207,4 +336,6 @@ module.exports = {
   logoutUser,
   forgotPasswordService,
   resetPasswordService,
+  verifyEmailService,
+  resendVerificationEmailService
 };

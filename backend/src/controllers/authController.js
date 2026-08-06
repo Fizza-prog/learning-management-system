@@ -5,6 +5,8 @@ const {
   logoutUser,
   forgotPasswordService,
   resetPasswordService,
+  verifyEmailService,
+  resendVerificationEmailService
 } = require("../services/authService");
 
 const register = async (req, res) => {
@@ -28,10 +30,20 @@ const login = async (req, res) => {
   try {
     const result = await loginUser(req.body);
 
+    res.cookie("refreshToken", result.refreshToken, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
+    const { refreshToken, ...responseData } = result;
+
+
     res.status(200).json({
       success: true,
       message: "Login successful.",
-      data: result,
+      data: responseData,
     });
   } catch (error) {
     res.status(400).json({
@@ -58,14 +70,13 @@ const getProfile = async (req, res) => {
 const refreshToken = async (req, res) => {
   try {
     const result = await refreshAccessToken(
-      req.body.refreshToken
+      req.cookies.refreshToken
     );
 
     res.status(200).json({
       success: true,
       data: result,
     });
-
   } catch (error) {
     res.status(400).json({
       success: false,
@@ -74,15 +85,19 @@ const refreshToken = async (req, res) => {
   }
 };
 
+
 const logout = async (req, res) => {
   try {
-    await logoutUser(req.body.refreshToken);
+    const refreshToken = req.cookies.refreshToken;
+
+    await logoutUser(refreshToken);
+
+    res.clearCookie("refreshToken");
 
     res.status(200).json({
       success: true,
       message: "Logged out successfully.",
     });
-
   } catch (error) {
     res.status(400).json({
       success: false,
@@ -90,6 +105,8 @@ const logout = async (req, res) => {
     });
   }
 };
+
+
 const forgotPassword = async (req, res) => {
   try {
     const result = await forgotPasswordService(
@@ -128,6 +145,45 @@ const resetPassword = async (req, res) => {
     });
   }
 };
+const verifyEmail = async (req, res) => {
+  try {
+    const { token } = req.params;
+
+    const result = await verifyEmailService(token);
+
+    return res.status(200).json({
+      success: true,
+      message: result.message,
+    });
+
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+const resendVerificationEmail = async (
+  req,
+  res
+) => {
+  try {
+    const result =
+      await resendVerificationEmailService(
+        req.body.email
+      );
+
+    return res.status(200).json({
+      success: true,
+      message: result.message,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
 
 module.exports = {
   register,
@@ -137,5 +193,7 @@ module.exports = {
   logout,
   forgotPassword,
   resetPassword,
+  verifyEmail,
+  resendVerificationEmail,
 };
   
