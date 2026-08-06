@@ -1,0 +1,28 @@
+.recent-schools {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.recent-schools-title {
+  margin-bottom: 20px;
+}
+
+.schools-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.schools-table th,
+.schools-table td {
+  padding: 12px;
+  text-align: left;
+}
+
+.schools-table thead {
+  background: #f5f5f5;
+}
+
+.schools-table tbody tr:hover {
+  background: #fafafa;
+}

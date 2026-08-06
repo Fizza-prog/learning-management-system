@@ -1,22 +1,23 @@
 import "./HowItWorks.css";
+
 const steps = [
   {
     number: "01",
     title: "Register Your School",
     description:
-      "Create your school's account and set up your institution in just a few steps.",
+      "Create your school's account and set up your institution in just a few simple steps.",
   },
   {
     number: "02",
     title: "Manage Daily Operations",
     description:
-      "Handle students, attendance, fees, timetables, and grades from a centralized dashboard.",
+      "Handle students, attendance, fees, timetables, and grades from one centralized dashboard.",
   },
   {
     number: "03",
     title: "Track Progress",
     description:
-      "Monitor academic performance, attendance, and important updates through insightful reports.",
+      "Monitor academic performance, attendance, and important updates with insightful reports.",
   },
 ];
 

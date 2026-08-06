@@ -12,7 +12,7 @@ function LandingPage() {
       <Features />
       <WhyChooseUs />
       <HowItWorks />
-      <Footer />
+    
     </>
   );
 }

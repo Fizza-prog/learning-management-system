@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AuthInput from "../components/AuthInput";
 import { useAuth } from "../context/AuthContext";
-// import { loginUser } from "../services/authService";
+import { loginUser } from "../../../api/authApi";
 import { validateLogin } from "../services/validation";
 import "./Login.css";
-import {MdEmail} from "react-icons/md";
-import {FaLock} from "react-icons/fa"
-
+import { MdEmail } from "react-icons/md";
+import { FaLock } from "react-icons/fa"
+import { toast } from "react-toastify";
 
 function Login() {
   const navigate = useNavigate();
@@ -42,68 +42,73 @@ function Login() {
 
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
+
+      Object.values(validationErrors).forEach((message) => {
+        toast.error(message);
+      });
+
       return;
     }
 
     setErrors({});
 
     try {
-      // Later:
-      // const data = await loginUser(formData);
-      // login(data.user, data.token);
+      const response = await loginUser(formData);
 
-      const userData = {
-        name: "Fizza",
-        email: formData.email,
-        role: "students",
-      };
+      const { user, accessToken, refreshToken } = response.data;
 
-      const userToken = "dummy-jwt-token";
+      login(user, accessToken);
 
-      login(userData, userToken);
+      localStorage.setItem("refreshToken", refreshToken);
+
+      toast.success(response.message);
 
       navigate("/dashboard");
     } catch (error) {
       console.error(error);
-    }
+
+      toast.error(
+        error.response?.data?.message || "Login failed."
+      );
+    }}
+
+    return (
+      <div className="auth-page">
+        <div className="auth-card">
+          <h1>Welcome Back</h1>
+          <p>Login to your LMS account</p>
+
+          <form className="auth-form" onSubmit={handleSubmit}>
+            <AuthInput
+              type="email"
+              name="email"
+              placeholder="Email"
+              icon={<MdEmail />}
+              value={formData.email}
+              onChange={handleChange}
+              error={errors.email}
+            />
+
+            <AuthInput
+              type="password"
+              name="password"
+              placeholder="Password"
+              icon={<FaLock />}
+              value={formData.password}
+              onChange={handleChange}
+              error={errors.password}
+            />
+
+            <Link to="/forgot-password" className="forgot-password">
+              Forgot Password?
+            </Link>
+
+            <button type="submit">Login</button>
+
+          </form>
+        </div>
+      </div>
+    );
   }
 
-  return (
-    <div className="auth-page">
-      <div className="auth-card">
-        <h1>Welcome Back</h1>
-        <p>Login to your LMS account</p>
-
-        <form className="auth-form" onSubmit={handleSubmit}>
-          <AuthInput
-            type="email"
-            name="email"
-            placeholder="Email"
-            icon={<MdEmail/>}
-            value={formData.email}
-            onChange={handleChange}
-            error={errors.email}
-          />
-
-          <AuthInput
-            type="password"
-            name="password"
-            placeholder="Password"
-            icon={<FaLock/>}
-            value={formData.password}
-            onChange={handleChange}
-            error={errors.password}
-          />
-
-         <Link to="/forgot-password" className="forgot-password">
-           Forgot Password?
-         </Link>
-
-          <button type="submit">Login</button>
-        </form>
-      </div>
-    </div>
-  );
-}
-
-export default Login;
+  export default Login;

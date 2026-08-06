@@ -1,6 +1,10 @@
+/* ===========================
+   Navbar
+=========================== */
+
 .navbar {
   width: 100%;
-  background-color: #ffffff;
+  background: #ffffff;
   border-bottom: 1px solid #e5e7eb;
   position: sticky;
   top: 0;
@@ -9,7 +13,7 @@
 
 .navbar-container {
   max-width: 1200px;
-  margin: 0 auto;
+  margin: auto;
   padding: 18px 24px;
 
   display: flex;
@@ -17,60 +21,63 @@
   align-items: center;
 }
 
+/* ===========================
+   Logo
+=========================== */
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
 .logo a {
   text-decoration: none;
+  color: #3525cd;
   font-size: var(--text-xl);
   font-weight: 700;
-  color: #3525CD;
   font-family: var(--font-family);
 }
 
+.logo-icon {
+  font-size: 1.6rem;
+  color: #3525cd;
+  margin-right: 8px;
+}
+
+/* ===========================
+   Navigation
+=========================== */
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
 .nav-links {
-    display: flex;
-    gap: 25px;
-    list-style: none;
+  display: flex;
+  list-style: none;
+  gap: 25px;
 }
 
 .nav-links a {
-    text-decoration: none;
-    font-family: var(--font-family);
-    font-size: var(--text-md);
-    color:#464555;
+  text-decoration: none;
+  color: #464555;
+  font-size: var(--text-md);
+  font-family: var(--font-family);
+  transition: 0.3s;
 }
 
 .nav-links a:hover {
-    color: #3525CD;
+  color: #3525cd;
 }
 
-.login-btn {
-    background-color: #3525CD;
-    color: white;
-    border: 1px solid #d1d5db;
-    font-family: var(--font-family);
-
-}
-
-.primary-btn{
-    background-color: #3525CD;
-    color: white;
-    border: 1px solid #d1d5db;
-    font-family: var(--font-family);
-}
-
-.primary-btn:hover {
-      background-color: #f3f4f6;
-      color:#464555;
-
-}
-
-.login-btn:hover {
-      background-color: #f3f4f6;
-      color:#464555;
-}
+/* ===========================
+   Buttons
+=========================== */
 
 .nav-actions {
   display: flex;
-  align-items: center;
   gap: 1rem;
 }
 
@@ -78,16 +85,127 @@
 .primary-btn {
   padding: 10px 20px;
   border-radius: 6px;
+  cursor: pointer;
   font-size: var(--text-md);
   font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  transition: 0.3s;
+  font-family: var(--font-family);
 }
 
-.logo-icon {
-  margin-right: 8px;
-  font-size: 1.5rem;
-  color: #3525CD;
-  position: relative;
-  top: 3px;
+.login-btn {
+  background: white;
+  color: #3525cd;
+  border: 1px solid #3525cd;
+}
+
+.login-btn:hover {
+  background: #3525cd;
+  color: white;
+}
+
+.primary-btn {
+  background: #3525cd;
+  color: white;
+  border: none;
+}
+
+.primary-btn:hover {
+  background: #2417a4;
+}
+
+/* ===========================
+   Hamburger
+=========================== */
+
+.menu-icon {
+  display: none;
+  font-size: 1.7rem;
+  cursor: pointer;
+  color: #3525cd;
+}
+
+/* ===========================
+   Tablet
+=========================== */
+
+@media (max-width: 992px) {
+
+  .navbar-container {
+    padding: 16px 20px;
+  }
+
+  .menu-icon {
+    display: block;
+  }
+
+  .nav-menu {
+    position: absolute;
+    top: 100%;
+    left: -100%;
+    width: 100%;
+    background: white;
+    border-top: 1px solid #e5e7eb;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 30px 0;
+    gap: 25px;
+
+    transition: left 0.3s ease;
+  }
+
+  .nav-menu.active {
+    left: 0;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .nav-actions {
+    flex-direction: column;
+    width: 90%;
+    align-items: center;
+  }
+
+  .login-btn,
+  .primary-btn {
+    width: 220px;
+  }
+
+}
+
+/* ===========================
+   Mobile
+=========================== */
+
+@media (max-width: 576px) {
+
+  .navbar-container {
+    padding: 14px 16px;
+  }
+
+  .logo a {
+    font-size: 1.3rem;
+  }
+
+  .logo-icon {
+    font-size: 1.4rem;
+  }
+
+  .menu-icon {
+    font-size: 1.5rem;
+  }
+
+  .login-btn,
+  .primary-btn {
+    width: 200px;
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+
 }

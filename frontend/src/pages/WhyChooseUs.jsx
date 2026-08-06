@@ -1,4 +1,5 @@
 import "./WhyChooseUs.css";
+
 const reasons = [
   {
     title: "Multi-Tenant Architecture",

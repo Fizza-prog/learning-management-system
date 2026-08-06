@@ -19,12 +19,12 @@ export function validateLogin(formData) {
 export function validateSignup(formData) {
   const errors = {};
 
-  if (!formData.schoolName.trim()) {
-    errors.schoolName = "School name is required";
+  if (!formData.firstName.trim()) {
+    errors.firstName = "First name is required";
   }
 
-  if (!formData.adminName.trim()) {
-    errors.adminName = "Admin name is required";
+  if (!formData.lastName.trim()) {
+    errors.lastName = "Last name is required";
   }
 
   if (!formData.email.trim()) {
@@ -40,10 +40,10 @@ export function validateSignup(formData) {
   }
 
   if (!formData.confirmPassword.trim()) {
-  errors.confirmPassword = "Confirm password is required";
-} else if (formData.password !== formData.confirmPassword) {
-  errors.confirmPassword = "Passwords do not match";
-}
+    errors.confirmPassword = "Confirm password is required";
+  } else if (formData.password !== formData.confirmPassword) {
+    errors.confirmPassword = "Passwords do not match";
+  }
 
   return errors;
 }

@@ -4,12 +4,8 @@ import { useAuth } from "../features/auth/context/AuthContext";
 function RoleGuard({ allowedRoles }) {
   const { user } = useAuth();
 
-  if (!user) {
-    return <Navigate to="/login" />;
-  }
-
   if (!allowedRoles.includes(user.role)) {
-    return <Navigate to="/dashboard" />;
+    return <Navigate to="/dashboard" replace />;
   }
 
   return <Outlet />;

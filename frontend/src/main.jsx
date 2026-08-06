@@ -5,6 +5,7 @@ import "./styles/variable.css";
 import "./index.css";
 import { BrowserRouter } from "react-router";
 import { AuthProvider } from "./features/auth/context/AuthContext";
+import "./styles/dashboard.css"
 
 ReactDOM.createRoot(document.getElementById("root")).render(
  <AuthProvider>
