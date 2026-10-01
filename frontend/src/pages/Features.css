@@ -14,7 +14,8 @@
 
 .features-container h2 {
   text-align: center;
-  font-size: 2.5rem;
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
   color: #464555;
   margin-bottom: 16px;
   font-family: var(--font-family);
@@ -26,7 +27,7 @@
   text-align: center;
   color: #6b7280;
   line-height: 1.7;
-  font-size: 1rem;
+  font-size: var(--text-md);
   font-family: var(--font-family);
 }
 
@@ -58,7 +59,8 @@
 }
 
 .feature-card h3 {
-  font-size: 1.3rem;
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
   color: #3525cd;
   margin-bottom: 12px;
   font-family: var(--font-family);
@@ -67,7 +69,7 @@
 .feature-card p {
   color: #6b7280;
   line-height: 1.7;
-  font-size: 1rem;
+  font-size: var(--text-md);
   font-family: var(--font-family);
 }
 
@@ -81,7 +83,7 @@
   }
 
   .features-container h2 {
-    font-size: 2.2rem;
+    font-size: var(--text-xl);
   }
 }
 
@@ -95,11 +97,11 @@
   }
 
   .features-container h2 {
-    font-size: 2rem;
+    font-size: var(--text-xl);
   }
 
   .features-subtitle {
-    font-size: 0.95rem;
+    font-size: var(--text-md);
     margin-bottom: 40px;
   }
 
@@ -114,11 +116,11 @@
   }
 
   .feature-card h3 {
-    font-size: 1.2rem;
+    font-size: var(--text-lg);
   }
 
   .feature-card p {
-    font-size: 0.95rem;
+    font-size: var(--text-md);
   }
 }
 
@@ -132,11 +134,11 @@
   }
 
   .features-container h2 {
-    font-size: 1.75rem;
+    font-size: var(--text-xl);
   }
 
   .features-subtitle {
-    font-size: 0.9rem;
+    font-size: var(--text-md);
   }
 
   .feature-card {
@@ -144,11 +146,53 @@
   }
 
   .feature-card h3 {
-    font-size: 1.1rem;
+    font-size: var(--text-lg);
   }
 
   .feature-card p {
-    font-size: 0.9rem;
+    font-size: var(--text-md);
     line-height: 1.6;
+  }
+}
+
+.features-container h2 {
+  font-size: 30px;
+}
+
+.features-subtitle {
+  font-size: 18px;
+}
+
+.feature-card h3 {
+  font-size: 20px;
+}
+
+.feature-card p {
+  font-size: 16px;
+}
+
+@media (max-width: 1024px) {
+  .features-container h2 {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .features-container h2 {
+    font-size: 26px;
+  }
+
+  .features-subtitle {
+    font-size: 17px;
+  }
+
+  .feature-card h3 {
+    font-size: 19px;
+  }
+}
+
+@media (max-width: 480px) {
+  .features-container h2 {
+    font-size: 24px;
   }
 }

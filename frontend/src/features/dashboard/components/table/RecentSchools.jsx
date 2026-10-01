@@ -1,5 +1,15 @@
+/**
+ * @file RecentSchools.jsx
+ * @description Renders recent school records in the super-admin dashboard.
+ *
+ * Responsibilities:
+ * - Display the recent-schools table headings.
+ * - Delegate each school row to the SchoolRow component.
+ */
 import SchoolRow from "./SchoolRow";
 import "./RecentSchools.css";
+import "../adminTable.css";
+
 function RecentSchools({ schools }) {
   return (
     <section className="recent-schools">
@@ -13,10 +23,8 @@ function RecentSchools({ schools }) {
             <th>School</th>
             <th>Admin</th>
             <th>Students</th>
-            <th>Plan</th>
             <th>Status</th>
             <th>Created</th>
-            <th>Actions</th>
           </tr>
         </thead>
 

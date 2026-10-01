@@ -1,24 +1,35 @@
+/**
+ * @file MainLayout.jsx
+ * @description Provides the shared layout for authenticated dashboard routes.
+ *
+ * Responsibilities:
+ * - Render the dashboard navigation and top bar.
+ * - Display the active route through an outlet.
+ */
 import { Outlet } from "react-router-dom";
 import Sidebar from "../features/dashboard/components/sidebar/Sidebar";
 import Topbar from "../features/dashboard/components/topbar/Topbar";
 
-import { currentUser } from "../data/currentUser";
-
+import { useAuth } from "../features/auth/context/AuthContext";
 
 import { schoolAdminMenu } from "../features/dashboard/config/schoolAdminConfig";
-
-
 import { superAdminMenu } from "../features/dashboard/config/superAdminConfig";
 
-// Later
-// import { teacherMenu } from "../features/dashboard/config/teacherConfig";
-// import { studentMenu } from "../features/dashboard/config/studentConfig";
-
 function MainLayout() {
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (!user) { 
+    return <p>Unauthorized</p>;
+  }
+
   let menu = [];
   let role = "";
 
-  switch (currentUser.role) {
+  switch (user.role) {
     case "admin":
       menu = schoolAdminMenu;
       role = "School Admin";
@@ -28,16 +39,6 @@ function MainLayout() {
       menu = superAdminMenu;
       role = "Super Admin";
       break;
-
-    // case "teacher":
-    //   menu = teacherMenu;
-    //   role = "Teacher";
-    //   break;
-
-    // case "student":
-    //   menu = studentMenu;
-    //   role = "Student";
-    //   break;
 
     default:
       menu = [];
@@ -60,34 +61,3 @@ function MainLayout() {
 }
 
 export default MainLayout;
-
-
-
-
-
-
-// import { Outlet } from "react-router-dom";
-// import Sidebar from "../features/dashboard/components/sidebar/Sidebar";
-// import Topbar from "../features/dashboard/components/topbar/Topbar";
-
-// function MainLayout() {
-//   return (
-//     <div className="dashboard-layout">
-
-//       <Sidebar />
-
-//       <div className="dashboard-content">
-
-//         <Topbar />
-
-//         <main>
-//           <Outlet />
-//         </main>
-
-//       </div>
-
-//     </div>
-//   );
-// }
-
-// export default MainLayout;

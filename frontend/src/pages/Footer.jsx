@@ -1,3 +1,11 @@
+/**
+ * @file Footer.jsx
+ * @description Renders the public-site footer and navigation links.
+ *
+ * Responsibilities:
+ * - Display the product identity and summary.
+ * - Provide links to homepage sections.
+ */
 import "./Footer.css";
 import { FaGraduationCap } from "react-icons/fa";
 

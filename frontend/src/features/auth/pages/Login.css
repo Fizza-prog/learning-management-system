@@ -24,13 +24,14 @@
 .auth-card h1 {
   font-family: var(--font-family);
   color: #464555;
-  font-size: 36px;
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
   margin-bottom: 8px;
   text-align: center;
 }
 
 .auth-card p {
-  font-size: 18px;
+  font-size: var(--text-md);
   color: #6b7280;
   margin-bottom: 24px;
   text-align: center;
@@ -50,7 +51,7 @@
   padding: 0 16px;           /* text ko left edge se chipakne se roka */
   border: 1px solid #d1d5db;
   border-radius: 8px;
-  font-size: 18px;
+  font-size: var(--text-md);
   box-sizing: border-box;    /* padding width ko overflow nahi karne dega */
   margin-bottom: 12px;       /* next field se spacing */
 }
@@ -61,7 +62,7 @@
 }
 
 .auth-form .error-text {
-  font-size: 14px;
+  font-size: var(--text-md);
   color: #dc2626;
   margin: -8px 0 4px 4px;   /* input ke sath alignment, thoda gap upar se */
   text-align: left;
@@ -75,15 +76,15 @@
   background-color: #3525CD;
   color: white;
   font-family: var(--font-family);
-  font-size: 18px;
-  font-weight: 400;
+  font-size: var(--text-md);
+  font-weight: var(--weight-medium);
   cursor: pointer;
   margin-top: 12px;
 }
 
 .forgot-password{
     color:#3525CD;
-    font-size: large;
+    font-size: var(--text-sm);
     font-family: var(--font-family);
     text-decoration: none;
 }

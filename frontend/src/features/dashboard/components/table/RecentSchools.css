@@ -1,28 +1,60 @@
 .recent-schools {
-  background: white;
+  overflow-x: auto;
+  background: #ffffff;
   padding: 20px;
-  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
 }
 
 .recent-schools-title {
   margin-bottom: 20px;
 }
 
-.schools-table {
+.recent-schools .schools-table {
   width: 100%;
-  border-collapse: collapse;
+  min-width: 600px;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
 }
 
-.schools-table th,
-.schools-table td {
+.recent-schools .schools-table th,
+.recent-schools .schools-table td {
   padding: 12px;
   text-align: left;
+  border-bottom: 1px solid #edf0f3;
 }
 
-.schools-table thead {
-  background: #f5f5f5;
+.recent-schools .schools-table th {
+  background: #f8fafc;
+  color: #64748b;
+  border-bottom-color: #e5e7eb;
 }
 
-.schools-table tbody tr:hover {
-  background: #fafafa;
+.recent-schools .schools-table th:nth-child(3),
+.recent-schools .schools-table td:nth-child(3) {
+  text-align: center;
+}
+
+.recent-schools .schools-table th:nth-child(5),
+.recent-schools .schools-table td:nth-child(5) {
+  text-align: right;
+}
+
+.recent-schools .schools-table th:nth-child(4),
+.recent-schools .schools-table td:nth-child(4) {
+  text-align: center;
+}
+
+.recent-schools .schools-table tbody tr {
+  transition: background-color 140ms ease;
+}
+
+.recent-schools .schools-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.recent-schools .schools-table tbody tr:last-child td {
+  border-bottom: 0;
 }

@@ -1,12 +1,34 @@
+/**
+ * @file sanitizeUser.js
+ * @description Removes sensitive fields before returning user data.
+ *
+ * Responsibilities:
+ * - Convert a user model to a plain object.
+ * - Exclude credentials and verification secrets from the result.
+ */
 const sanitizeUser = (user) => {
-  const userObject = user.toJSON();
+  const userData = user.toJSON();
 
-  delete userObject.password;
-  delete userObject.refreshToken;
-  delete userObject.resetPasswordToken;
-  delete userObject.resetPasswordExpiry;
+  delete userData.password;
 
-  return userObject;
+  // Authentication / security fields
+  delete userData.refreshToken;
+
+  // Email verification fields
+  delete userData.emailVerificationToken;
+  delete userData.emailVerificationExpiry;
+  delete userData.lastVerificationEmailSent;
+
+  // Email change fields
+  delete userData.pendingEmail;
+  delete userData.emailChangeToken;
+  delete userData.emailChangeExpiry;
+
+  // Password reset fields
+  delete userData.resetPasswordToken;
+  delete userData.resetPasswordExpiry;
+
+  return userData;
 };
 
-module.exports = sanitizeUser;
+export default sanitizeUser;

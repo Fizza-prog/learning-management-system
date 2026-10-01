@@ -1,0 +1,286 @@
+.account-settings-page {
+  width: 100%;
+  padding: 0;
+}
+
+/* =========================
+   Header
+========================= */
+
+.account-settings-header {
+  margin-bottom: 28px;
+}
+
+.account-settings-header h1 {
+  margin: 0;
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+}
+
+.account-settings-header p {
+  margin: 8px 0 0;
+  color: #777;
+  font-size: var(--text-md);
+}
+
+/* =========================
+   Cards
+========================= */
+
+.account-settings-card {
+  max-width: 850px;
+  margin: 0 auto 20px;
+  padding: 26px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+}
+
+.account-settings-card h2 {
+  margin: 0 0 22px;
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
+}
+
+/* =========================
+   Current Email / Status
+========================= */
+
+.current-email {
+  margin-bottom: 22px;
+}
+
+.current-email label,
+.verification-status label,
+.settings-info label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: #666;
+}
+
+.current-email p,
+.verification-status p,
+.settings-info p {
+  margin: 0;
+  font-size: var(--text-md);
+  color: #222;
+}
+
+/* =========================
+   Notes / Informational Text
+========================= */
+
+.settings-note {
+  margin: 12px 0 0;
+  color: #777;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+/* =========================
+   Success / Error Messages
+========================= */
+
+.settings-success,
+.settings-error {
+  margin: 12px 0 0;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+.settings-success {
+  color: #15803d;
+}
+
+.settings-error {
+  color: #dc2626;
+}
+
+/* =========================
+   Forms
+========================= */
+
+.settings-field {
+  margin-bottom: 18px;
+}
+
+.settings-field label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: #444;
+}
+
+.settings-field input {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 42px;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: var(--text-md);
+  outline: none;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.settings-field input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* =========================
+   Buttons
+========================= */
+
+.account-settings-card button:not(.dashboard-header-button) {
+  display: block;
+  width: 60%;
+  margin: 24px auto 0;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 7px;
+  background: #222;
+  color: #fff;
+  font-size: var(--text-md);
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    opacity 160ms ease;
+}
+
+.account-settings-card .dashboard-header-button {
+  display: block;
+  width: 60%;
+  margin: 24px auto 0;
+  transition:
+    background-color 160ms ease,
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+/* =========================
+   Button Hover
+========================= */
+
+.account-settings-card
+  button:not(.dashboard-header-button):not(:disabled):hover {
+  background: #333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.12);
+}
+
+.account-settings-card
+  .dashboard-header-button:not(:disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.12);
+}
+
+/* =========================
+   Disabled Buttons
+========================= */
+
+.account-settings-card button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* =========================
+   Verification Status
+========================= */
+
+.verified-status {
+  color: #15803d;
+  font-weight: var(--weight-medium);
+}
+
+.unverified-status {
+  color: #dc2626;
+  font-weight: var(--weight-medium);
+}
+
+/* =========================
+   Account Information
+========================= */
+
+.account-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.settings-info {
+  padding: 16px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+}
+
+/* =========================
+   Danger Zone
+========================= */
+
+.danger-zone {
+  border: 1px solid #f0caca;
+}
+
+.danger-zone h2 {
+  color: #c62828;
+}
+
+.danger-zone p {
+  margin: 0 0 20px;
+  color: #777;
+  font-size: var(--text-md);
+}
+
+.danger-button {
+  background: #c62828 !important;
+}
+
+.danger-button:not(:disabled):hover {
+  background: #a91f1f !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(198, 40, 40, 0.18);
+}
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 700px) {
+  .account-settings-page {
+    padding: 20px;
+  }
+
+  .account-settings-header {
+    margin-bottom: 24px;
+  }
+
+  .account-settings-card {
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+
+  .account-settings-card h2 {
+    margin-bottom: 20px;
+  }
+
+  .account-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .account-settings-card button:not(.dashboard-header-button),
+  .account-settings-card .dashboard-header-button {
+    width: 80%;
+  }
+}

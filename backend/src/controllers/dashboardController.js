@@ -1,75 +1,58 @@
-const getDashboard = async (req, res) => {
+/**
+ * @file dashboardController.js
+ * @description Handles dashboard statistics and fee-collection requests.
+ *
+ * Responsibilities:
+ * - Dispatch dashboard requests to their data services.
+ * - Enforce the super-admin dashboard role requirement.
+ */
+import AppError from "../utils/AppError.js";
+import {
+  getSchoolAdminDashboardService,
+  getSchoolAdminFeeCollectionService,
+  getSuperAdminDashboardService,
+} from "../services/dashboardService.js";
+
+const getSchoolAdminDashboard = async (req, res, next) => {
   try {
-    const user = req.user;
-
-    let dashboardData;
-
-    switch (user.role) {
-      case "super_admin":
-        dashboardData = {
-          role: "super_admin",
-          title: "Super Admin Dashboard",
-          stats: {
-            schools: 0,
-            admins: 0,
-          },
-        };
-        break;
-
-      case "admin":
-        dashboardData = {
-          role: "admin",
-          title: "Admin Dashboard",
-          stats: {
-            students: 0,
-            teachers: 0,
-          },
-        };
-        break;
-
-      case "teacher":
-        dashboardData = {
-          role: "teacher",
-          title: "Teacher Dashboard",
-          stats: {
-            classes: 0,
-            courses: 0,
-          },
-        };
-        break;
-
-      case "student":
-        dashboardData = {
-          role: "student",
-          title: "Student Dashboard",
-          stats: {
-            courses: 0,
-            assignments: 0,
-          },
-        };
-        break;
-
-      default:
-        return res.status(403).json({
-          success: false,
-          message: "Invalid role",
-        });
-    }
-
-    res.status(200).json({
-      success: true,
-      data: dashboardData,
-    });
-
+    const data = await getSchoolAdminDashboardService(req.user.schoolId);
+    return res.status(200).json({ success: true, data });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    return next(error);
   }
 };
 
+const getSchoolAdminFeeCollection = async (req, res, next) => {
+  try {
+    const data = await getSchoolAdminFeeCollectionService(req.user.schoolId);
+    return res.status(200).json({ success: true, data });
+  } catch (error) {
+    return next(error);
+  }
+};
 
-module.exports = {
+const getDashboard = async (req, res, next) => {
+  try {
+    if (req.user.role !== "super_admin") {
+      throw new AppError(
+        "Only super admin can access this dashboard",
+        403
+      );
+    }
+
+    const data = await getSuperAdminDashboardService();
+
+    return res.status(200).json({
+      success: true,
+      data,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export {
   getDashboard,
+  getSchoolAdminDashboard,
+  getSchoolAdminFeeCollection,
 };

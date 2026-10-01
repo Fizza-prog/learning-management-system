@@ -1,0 +1,544 @@
+:root {
+  --admin-table-border: #e5eaf0;
+  --admin-table-header: #f5f8fb;
+  --admin-table-text: #465363;
+  --admin-table-heading: #647386;
+  --admin-table-hover: #f7fafc;
+  --admin-card-border: #e5eaf0;
+  --admin-card-label: #6b7785;
+  --admin-card-value: #1f2937;
+}
+
+body :is(
+  .admin-list-table,
+  .classes-table,
+  .attendance-table,
+  .exam-table,
+  .timetable-table
+) {
+  width: 100%;
+  color: var(--admin-table-text);
+}
+
+body :is(
+  .admin-list-table,
+  .classes-table,
+  .attendance-table,
+  .exam-table,
+  .timetable-table
+) th,
+body :is(
+  .admin-list-table,
+  .classes-table,
+  .attendance-table,
+  .exam-table,
+  .timetable-table
+) td {
+  padding: 15px 20px;
+  border-bottom: 1px solid var(--admin-table-border);
+  text-align: left;
+  vertical-align: middle;
+}
+
+body :is(
+  .admin-list-table,
+  .classes-table,
+  .attendance-table,
+  .exam-table,
+  .timetable-table
+) th {
+  padding: 15px 16px;
+}
+
+body :is(
+  .admin-list-table,
+  .classes-table,
+  .attendance-table,
+  .exam-table,
+  .timetable-table
+) th {
+  background: var(--admin-table-header);
+  color: var(--admin-table-heading);
+  font-size: var(--text-xs, 12px);
+  font-weight: var(--weight-semibold, 600);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+body :is(
+  .admin-list-table,
+  .classes-table,
+  .attendance-table,
+  .exam-table,
+  .timetable-table
+) td {
+  font-size: var(--text-md, 14px);
+}
+
+body :is(
+  .admin-list-table,
+  .classes-table,
+  .attendance-table,
+  .exam-table,
+  .timetable-table
+) tbody tr {
+  transition: background-color 140ms ease;
+}
+
+body :is(
+  .admin-list-table,
+  .classes-table,
+  .attendance-table,
+  .exam-table,
+  .timetable-table
+) tbody tr:hover {
+  background: var(--admin-table-hover);
+}
+
+body :is(
+  .admin-list-table,
+  .classes-table,
+  .attendance-table,
+  .exam-table,
+  .timetable-table
+) tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+body :is(
+  .admin-list-table,
+  .classes-table,
+  .attendance-table,
+  .exam-table,
+  .timetable-table
+) .actions-heading,
+body :is(
+  .admin-list-table,
+  .classes-table,
+  .attendance-table,
+  .exam-table,
+  .timetable-table
+) .actions-cell {
+  width: 84px;
+  text-align: center !important;
+}
+
+body :is(.fees-actions, .announcements-actions) {
+  justify-content: center;
+  margin-inline: auto;
+}
+
+body :is(
+  .announcements-page .announcements-close,
+  .fees-page .fees-close,
+  .schools-page .schools-close,
+  .students-page .delete-modal-close,
+  .teachers-page .delete-modal-close,
+  .users-page .delete-modal-close,
+  .audit-logs-page .audit-modal-header > button
+) {
+  display: inline-grid;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid #f4caca;
+  border-radius: 5px;
+  background: #fff1f1;
+  color: #b42318;
+  cursor: pointer;
+  transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease;
+}
+
+body :is(.students-page, .teachers-page, .users-page) .delete-modal {
+  position: relative;
+}
+
+body :is(.students-page, .teachers-page, .users-page) .delete-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+}
+
+body :is(.students-page, .teachers-page, .users-page) .delete-modal-content h2 {
+  padding-right: 36px;
+}
+
+body :is(
+  .announcements-page .announcements-close,
+  .fees-page .fees-close,
+  .schools-page .schools-close,
+  .students-page .delete-modal-close,
+  .teachers-page .delete-modal-close,
+  .users-page .delete-modal-close,
+  .audit-logs-page .audit-modal-header > button
+):hover:not(:disabled),
+body :is(
+  .announcements-page .announcements-close,
+  .fees-page .fees-close,
+  .schools-page .schools-close,
+  .audit-logs-page .audit-modal-header > button
+):active:not(:disabled) {
+  border-color: #e8a5a5;
+  background: #ffe1e1;
+  color: #991b1b;
+}
+
+body :is(
+  .announcements-page .announcements-close,
+  .fees-page .fees-close,
+  .schools-page .schools-close,
+  .students-page .delete-modal-close,
+  .teachers-page .delete-modal-close,
+  .users-page .delete-modal-close,
+  .audit-logs-page .audit-modal-header > button
+):focus-visible {
+  outline: 2px solid #dc6b6b;
+  outline-offset: 2px;
+}
+
+body .fees-page .fees-status .status-dot,
+body .exam-page .exam-status::before {
+  display: none;
+}
+
+body :is(.attendance-page, .timetable-page) .attendance-header,
+body :is(.attendance-page, .timetable-page) .timetable-header {
+  margin-left: 8px;
+}
+
+body :is(.attendance-summary-row, .timetable-summary-row) {
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+body :is(.attendance-stat-card, .timetable-stat-card) {
+  min-height: 0;
+  gap: 12px;
+  padding: 12px 16px;
+}
+
+body :is(.attendance-stat-icon, .timetable-stat-icon) {
+  width: 36px;
+  height: 36px;
+  border-radius: 7px;
+}
+
+body :is(.attendance-stat-icon, .timetable-stat-icon) svg {
+  width: 18px;
+  height: 18px;
+}
+
+body :is(.attendance-stat-number, .timetable-stat-number) {
+  font-size: var(--text-2xl, 24px);
+}
+
+body :is(
+  .classes-summary-row,
+  .attendance-summary-row,
+  .timetable-summary-row,
+  .exam-summary-row,
+  .students-summary-row,
+  .teachers-summary-row,
+  .announcements-summary-row,
+  .audit-logs-count-row
+) {
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+body .students-page .students-summary-row,
+body .teachers-page .teachers-summary-row,
+body .fees-page .fees-summary-row,
+body .announcements-page .announcements-summary-row,
+body .schools-page .schools-summary-row,
+body .users-page .users-summary-row {
+  margin-bottom: 16px;
+}
+
+body .students-page .students-toolbar,
+body .teachers-page .teachers-toolbar,
+body .fees-page .fees-toolbar,
+body .announcements-page .announcements-toolbar {
+  margin-bottom: 16px;
+  padding: 0;
+}
+
+body .schools-page .schools-toolbar,
+body .users-page .users-toolbar {
+  margin-bottom: 16px;
+}
+
+body :is(
+  .classes-stat-card,
+  .attendance-stat-card,
+  .timetable-stat-card,
+  .exam-stat-card,
+  .students-page .admin-list-count-card,
+  .teachers-page .admin-list-count-card,
+  .announcements-page .admin-list-count-card,
+  .schools-page .admin-list-count-card,
+  .users-page .admin-list-count-card,
+  .fees-page .admin-list-count-card,
+  .audit-logs-page .admin-list-count-card,
+  .stats-card
+) {
+  box-sizing: border-box;
+  padding: 12px 16px;
+  border: 1px solid var(--admin-card-border);
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+body :is(
+  .classes-stat-info,
+  .attendance-stat-info,
+  .timetable-stat-info,
+  .exam-stat-info
+) {
+  display: flex;
+  min-width: 0;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+body :is(
+  .classes-stat-label,
+  .attendance-stat-label,
+  .timetable-stat-label,
+  .exam-stat-label,
+  .stats-card-title,
+  .students-page .admin-list-count-label,
+  .teachers-page .admin-list-count-label,
+  .announcements-page .admin-list-count-label,
+  .schools-page .admin-list-count-label,
+  .users-page .admin-list-count-label,
+  .fees-page .admin-list-count-label,
+  .audit-logs-page .admin-list-count-label
+) {
+  margin: 0;
+  color: var(--admin-card-label);
+  font-size: var(--text-sm, 14px);
+  font-weight: var(--weight-medium, 500);
+}
+
+body :is(
+  .classes-stat-number,
+  .attendance-stat-number,
+  .timetable-stat-number,
+  .exam-stat-number,
+  .stats-card-value,
+  .students-page .admin-list-count-number,
+  .teachers-page .admin-list-count-number,
+  .announcements-page .admin-list-count-number,
+  .schools-page .admin-list-count-number,
+  .users-page .admin-list-count-number,
+  .fees-page .admin-list-count-number,
+  .audit-logs-page .admin-list-count-number
+) {
+  margin: 0;
+  color: var(--admin-card-value);
+  font-size: var(--text-2xl, 24px);
+  font-weight: var(--weight-bold, 700);
+  line-height: 1.2;
+}
+
+body .exam-header {
+  margin-left: 8px;
+}
+
+body .stats-grid {
+  gap: 16px;
+}
+
+body .stats-card {
+  gap: 12px;
+  transition: box-shadow 160ms ease;
+}
+
+body .stats-card:hover {
+  transform: none;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+}
+
+body .stats-card-icon {
+  color: #2563eb;
+  font-size: 24px;
+}
+
+body :is(
+  .admin-list-count-icon,
+  .schools-count-icon,
+  .users-count-icon
+) {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  border-radius: 7px;
+}
+
+body :is(
+  .admin-list-count-icon,
+  .schools-count-icon,
+  .users-count-icon
+) svg {
+  width: 18px;
+  height: 18px;
+}
+
+body :is(
+  .students-page .verification-badge.verified,
+  .teachers-page .verification-badge.verified,
+  .schools-page .school-status-badge.active,
+  .fees-page .fees-status-paid,
+  .exam-page .exam-status--ready
+) {
+  border-color: #cce8d7;
+  background: #eaf6ef;
+  color: #26734d;
+}
+
+body :is(
+  .students-page .verification-badge.not-verified,
+  .teachers-page .verification-badge.not-verified,
+  .fees-page .fees-status-pending,
+  .exam-page .exam-status--warning,
+  .attendance-page .attendance-late
+) {
+  border-color: #f0dfb3;
+  background: #fff6df;
+  color: #8a6416;
+}
+
+body :is(
+  .schools-page .school-status-badge.inactive,
+  .attendance-page .attendance-absent,
+  .exam-page .exam-status--muted
+) {
+  border-color: #dfe5eb;
+  background: #f1f4f7;
+  color: #596675;
+}
+
+body .fees-page .fees-status-overdue {
+  border-color: #f1caca;
+  background: #fff0f0;
+  color: #a33d3d;
+}
+
+body .attendance-page .attendance-present,
+body .attendance-page .attendance-percentage {
+  border-color: #cce8d7;
+  background: #eaf6ef;
+  color: #26734d;
+}
+
+body .audit-logs-page .audit-action-badge {
+  border: 1px solid #d5e2ef;
+  border-radius: 6px;
+  background: #edf4fb;
+  color: #365c82;
+}
+
+body .users-page .role-badge.super_admin {
+  background: #eee9f7;
+  color: #5f4c81;
+}
+
+body .users-page .role-badge.admin {
+  background: #eaf1f8;
+  color: #365c82;
+}
+
+body .users-page .role-badge.teacher {
+  background: #eaf6ef;
+  color: #26734d;
+}
+
+body .users-page .role-badge.student {
+  background: #fff4e6;
+  color: #936022;
+}
+
+body .recent-schools .schools-table {
+  width: 100%;
+  color: var(--admin-table-text);
+}
+
+body .recent-schools .schools-table th,
+body .recent-schools .schools-table td {
+  padding: 15px 16px;
+  border-bottom: 1px solid var(--admin-table-border);
+  vertical-align: middle;
+}
+
+body .recent-schools .schools-table th {
+  background: var(--admin-table-header);
+  color: var(--admin-table-heading);
+  font-size: var(--text-xs, 12px);
+  font-weight: var(--weight-semibold, 600);
+  text-transform: uppercase;
+}
+
+body .recent-schools .schools-table tbody tr:hover {
+  background: var(--admin-table-hover);
+}
+
+body .recent-schools .schools-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+body .recent-schools .status-active {
+  border: 1px solid #cce8d7;
+  background: #eaf6ef;
+  color: #26734d;
+}
+
+body .recent-schools .status-suspended {
+  border: 1px solid #dfe5eb;
+  background: #f1f4f7;
+  color: #596675;
+}
+
+@media (max-width: 700px) {
+  body :is(
+    .admin-list-table,
+    .classes-table,
+    .attendance-table,
+    .exam-table,
+    .timetable-table
+  ) th,
+  body :is(
+    .admin-list-table,
+    .classes-table,
+    .attendance-table,
+    .exam-table,
+    .timetable-table
+  ) td {
+    padding: 12px 14px;
+  }
+
+  body :is(
+    .classes-stat-card,
+    .attendance-stat-card,
+    .timetable-stat-card,
+    .exam-stat-card,
+    .students-page .admin-list-count-card,
+    .teachers-page .admin-list-count-card,
+    .announcements-page .admin-list-count-card,
+    .schools-page .admin-list-count-card,
+    .users-page .admin-list-count-card,
+    .fees-page .admin-list-count-card,
+    .audit-logs-page .admin-list-count-card,
+    .stats-card
+  ) {
+    padding: 12px 14px;
+  }
+}
+
+body .schools-page .school-status-badge .status-dot {
+  display: none;
+}

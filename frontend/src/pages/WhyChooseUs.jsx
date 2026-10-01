@@ -1,3 +1,11 @@
+/**
+ * @file WhyChooseUs.jsx
+ * @description Presents the product benefits on the public homepage.
+ *
+ * Responsibilities:
+ * - Define the benefit content shown to visitors.
+ * - Render the Why Choose Us cards and section heading.
+ */
 import "./WhyChooseUs.css";
 
 const reasons = [

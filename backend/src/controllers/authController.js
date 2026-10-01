@@ -1,34 +1,27 @@
-const {
-  registerUser,
+/**
+ * @file authController.js
+ * @description Handles authentication, account recovery, and verification requests.
+ *
+ * Responsibilities:
+ * - Translate authentication requests into service calls and responses.
+ * - Set or clear the refresh-token cookie where required.
+ */
+import {
   loginUser,
   refreshAccessToken,
   logoutUser,
   forgotPasswordService,
   resetPasswordService,
   verifyEmailService,
-  resendVerificationEmailService
-} = require("../services/authService");
+  resendVerificationEmailService,
+  changePasswordService,
+  changeEmailService,
+  verifyEmailChangeService,
+} from "../services/authService.js";
 
-const register = async (req, res) => {
+const login = async (req, res, next) => {
   try {
-    const result = await registerUser(req.body);
-
-    res.status(201).json({
-      success: true,
-      message: "User registered successfully.",
-      data: result,
-    });
-  } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: error.message,
-    });
-  }
-};
-
-const login = async (req, res) => {
-  try {
-    const result = await loginUser(req.body);
+    const result = await loginUser(req.body, req.ip);
 
     res.cookie("refreshToken", result.refreshToken, {
       httpOnly: true,
@@ -37,135 +30,135 @@ const login = async (req, res) => {
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
-    const { refreshToken, ...responseData } = result;
+    const {
+      refreshToken,
+      ...responseData
+    } = result;
 
-
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: "Login successful.",
       data: responseData,
     });
   } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: error.message,
-    });
+    next(error);
   }
 };
 
-const getProfile = async (req, res) => {
+const getProfile = async (req, res, next) => {
   try {
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       data: req.user,
     });
   } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: error.message,
-    });
+    next(error);
   }
 };
 
-const refreshToken = async (req, res) => {
+const refreshToken = async (req, res, next) => {
   try {
     const result = await refreshAccessToken(
       req.cookies.refreshToken
     );
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       data: result,
     });
   } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: error.message,
-    });
+    next(error);
   }
 };
 
-
-const logout = async (req, res) => {
+const logout = async (req, res, next) => {
   try {
-    const refreshToken = req.cookies.refreshToken;
+    const refreshToken =
+      req.cookies.refreshToken;
 
     await logoutUser(refreshToken);
 
-    res.clearCookie("refreshToken");
+    res.clearCookie("refreshToken", {
+      httpOnly: true,
+      secure: false,
+      sameSite: "strict",
+    });
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: "Logged out successfully.",
     });
   } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: error.message,
-    });
+    next(error);
   }
 };
 
-
-const forgotPassword = async (req, res) => {
+const forgotPassword = async (
+  req,
+  res,
+  next
+) => {
   try {
-    const result = await forgotPasswordService(
-      req.body.email
-    );
-
-    res.status(200).json({
-      success: true,
-      message: result,
-    });
-
-  } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: error.message,
-    });
-  }
-};
-
-const resetPassword = async (req, res) => {
-  try {
-    const result = await resetPasswordService(
-      req.params.token,
-      req.body.password
-    );
-
-    res.status(200).json({
-      success: true,
-      message: result,
-    });
-
-  } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: error.message,
-    });
-  }
-};
-const verifyEmail = async (req, res) => {
-  try {
-    const { token } = req.params;
-
-    const result = await verifyEmailService(token);
+    const result =
+      await forgotPasswordService(
+        req.body.email
+      );
 
     return res.status(200).json({
       success: true,
       message: result.message,
     });
-
   } catch (error) {
-    return res.status(400).json({
-      success: false,
-      message: error.message,
-    });
+    next(error);
   }
 };
+
+const resetPassword = async (
+  req,
+  res,
+  next
+) => {
+  try {
+    const result =
+      await resetPasswordService(
+        req.params.token,
+        req.body.password,
+        req.ip
+      );
+
+    return res.status(200).json({
+      success: true,
+      message: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const verifyEmail = async (
+  req,
+  res,
+  next
+) => {
+  try {
+    const { token } = req.params;
+
+    const result =
+      await verifyEmailService(token);
+
+    return res.status(200).json({
+      success: true,
+      message: result.message,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const resendVerificationEmail = async (
   req,
-  res
+  res,
+  next
 ) => {
   try {
     const result =
@@ -178,15 +171,77 @@ const resendVerificationEmail = async (
       message: result.message,
     });
   } catch (error) {
-    return res.status(400).json({
-      success: false,
-      message: error.message,
-    });
+    next(error);
   }
 };
 
-module.exports = {
-  register,
+const changePassword = async (
+  req,
+  res,
+  next
+) => {
+  try {
+    const result =
+      await changePasswordService(
+        req.user.id,
+        req.body.currentPassword,
+        req.body.newPassword,
+        req.ip
+      );
+
+    return res.status(200).json({
+      success: true,
+      message: result.message,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const changeEmail = async (
+  req,
+  res,
+  next
+) => {
+  try {
+    const result = await changeEmailService(
+      req.user.id,
+      req.body.newEmail,
+      req.body.currentPassword,
+      req.ip
+    );
+
+    return res.status(200).json({
+      success: true,
+      message: result.message,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const verifyEmailChange = async (
+  req,
+  res,
+  next
+) => {
+  try {
+    const result =
+      await verifyEmailChangeService(
+        req.params.token,
+        req.ip
+      );
+
+    return res.status(200).json({
+      success: true,
+      message: result.message,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export {
   login,
   getProfile,
   refreshToken,
@@ -195,5 +250,7 @@ module.exports = {
   resetPassword,
   verifyEmail,
   resendVerificationEmail,
+  changePassword,
+  changeEmail,
+  verifyEmailChange,
 };
-  

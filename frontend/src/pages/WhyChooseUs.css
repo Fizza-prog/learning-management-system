@@ -14,7 +14,8 @@
 }
 
 .why-container h2 {
-  font-size: 2.5rem;
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
   color: #464555;
   margin-bottom: 16px;
   font-family: var(--font-family);
@@ -25,7 +26,7 @@
   margin: 0 auto 60px;
   color: #6b7280;
   line-height: 1.7;
-  font-size: 1rem;
+  font-size: var(--text-md);
   font-family: var(--font-family);
 }
 
@@ -58,7 +59,8 @@
 }
 
 .why-card h3 {
-  font-size: 1.3rem;
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
   color: #3525cd;
   margin-bottom: 14px;
   font-family: var(--font-family);
@@ -67,7 +69,7 @@
 .why-card p {
   color: #6b7280;
   line-height: 1.7;
-  font-size: 1rem;
+  font-size: var(--text-md);
   font-family: var(--font-family);
 }
 
@@ -81,7 +83,7 @@
   }
 
   .why-container h2 {
-    font-size: 2.2rem;
+    font-size: var(--text-xl);
   }
 
   .why-grid {
@@ -104,11 +106,11 @@
   }
 
   .why-container h2 {
-    font-size: 2rem;
+    font-size: var(--text-xl);
   }
 
   .why-subtitle {
-    font-size: 0.95rem;
+    font-size: var(--text-md);
     margin-bottom: 40px;
   }
 
@@ -123,11 +125,11 @@
   }
 
   .why-card h3 {
-    font-size: 1.2rem;
+    font-size: var(--text-lg);
   }
 
   .why-card p {
-    font-size: 0.95rem;
+    font-size: var(--text-md);
   }
 }
 
@@ -141,11 +143,11 @@
   }
 
   .why-container h2 {
-    font-size: 1.75rem;
+    font-size: var(--text-xl);
   }
 
   .why-subtitle {
-    font-size: 0.9rem;
+    font-size: var(--text-md);
   }
 
   .why-card {
@@ -153,11 +155,53 @@
   }
 
   .why-card h3 {
-    font-size: 1.1rem;
+    font-size: var(--text-lg);
   }
 
   .why-card p {
-    font-size: 0.9rem;
+    font-size: var(--text-md);
     line-height: 1.6;
+  }
+}
+
+.why-container h2 {
+  font-size: 30px;
+}
+
+.why-subtitle {
+  font-size: 18px;
+}
+
+.why-card h3 {
+  font-size: 20px;
+}
+
+.why-card p {
+  font-size: 16px;
+}
+
+@media (max-width: 992px) {
+  .why-container h2 {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .why-container h2 {
+    font-size: 26px;
+  }
+
+  .why-subtitle {
+    font-size: 17px;
+  }
+
+  .why-card h3 {
+    font-size: 19px;
+  }
+}
+
+@media (max-width: 480px) {
+  .why-container h2 {
+    font-size: 24px;
   }
 }

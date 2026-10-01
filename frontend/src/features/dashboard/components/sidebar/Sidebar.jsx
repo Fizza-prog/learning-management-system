@@ -1,6 +1,16 @@
-import { NavLink } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+/**
+ * @file Sidebar.jsx
+ * @description Renders role-specific dashboard navigation and account actions.
+ *
+ * Responsibilities:
+ * - Build navigation links from the active role's menu.
+ * - Provide the sidebar logout action.
+ */
+import { NavLink, useNavigate } from "react-router-dom";
+import { FaGraduationCap } from "react-icons/fa";
 import "./Sidebar.css";
+
+import { logoutUser } from "../../../../api/authApi";
 
 import {
   MdDashboard,
@@ -17,6 +27,7 @@ import {
   MdAssessment,
   MdLogout,
   MdPersonAdd,
+  MdAddBusiness,
 } from "react-icons/md";
 
 const iconMap = {
@@ -39,17 +50,29 @@ const iconMap = {
 };
 
 function Sidebar({ menu, role }) {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await logoutUser();
+    } catch (error) {
+      console.error("Logout failed:", error);
+    } finally {
+      localStorage.removeItem("accessToken");
+      navigate("/login");
+    }
+  };
 
   return (
     <aside className="sidebar">
-      {/* Logo */}
       <div className="sidebar-logo">
-        <h2>EduSphere</h2>
+        <div className="sidebar-brand">
+          <FaGraduationCap className="sidebar-logo-icon" />
+          <h2>EduLMS</h2>
+        </div>
         <p>{role}</p>
       </div>
 
-      {/* Navigation */}
       <nav className="sidebar-menu">
         {menu.map((item) => {
           const Icon = iconMap[item.icon];
@@ -58,6 +81,7 @@ function Sidebar({ menu, role }) {
             <NavLink
               key={item.id}
               to={item.path}
+              end={item.path === "/dashboard"}
               className={({ isActive }) =>
                 isActive
                   ? "sidebar-link active"
@@ -65,25 +89,45 @@ function Sidebar({ menu, role }) {
               }
             >
               {Icon && <Icon className="sidebar-icon" />}
-              <span className="sidebar-title">{item.title}</span>
+
+              <span className="sidebar-title">
+                {item.title}
+              </span>
             </NavLink>
           );
         })}
+
+
+        {/* 
+        <button
+          className="sidebar-add-member"
+          onClick={() => navigate("/dashboard/add-member")}
+        >
+          <MdPersonAdd className="sidebar-footer-icon" />
+          <span>Add New Member</span>
+        </button>
+        */}
+
+
+        {/*
+        <button
+          className="sidebar-add-member"
+          onClick={() => navigate("/dashboard/add-school")}
+        >
+          <MdAddBusiness className="sidebar-footer-icon" />
+          <span>Add New School</span>
+        </button>
+        */}
       </nav>
 
-      {/* Footer */}
       <div className="sidebar-footer">
         <button
-  className="sidebar-add-member"
-  onClick={() => navigate("/dashboard/add-member")}
->
-  <MdPersonAdd className="sidebar-footer-icon" />
-  <span>Add New Member</span>
-</button>
-        
-        
-
-        
+          className="sidebar-logout"
+          onClick={handleLogout}
+        >
+          <MdLogout className="sidebar-footer-icon" />
+          <span>Logout</span>
+        </button>
       </div>
     </aside>
   );

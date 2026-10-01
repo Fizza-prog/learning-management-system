@@ -1,7 +1,14 @@
-const authorize = require("../middleware/roleMiddleware");
-const express = require("express");
-const {
-  register,
+/**
+ * @file authRoutes.js
+ * @description Registers authentication, recovery, and verification endpoints.
+ *
+ * Responsibilities:
+ * - Route login, logout, profile, and refresh requests.
+ * - Route password and email verification workflows.
+ */
+import express from "express";
+
+import {
   login,
   getProfile,
   refreshToken,
@@ -9,37 +16,78 @@ const {
   forgotPassword,
   resetPassword,
   verifyEmail,
-  resendVerificationEmail
-} = require("../controllers/authController");
-const protect = require("../middleware/authMiddleware");
-const router = express.Router();
+  resendVerificationEmail,
+  changePassword,
+  changeEmail,
+  verifyEmailChange,
+} from "../controllers/authController.js";
 
+import protect from "../middleware/authMiddleware.js";
+import authorize from "../middleware/roleMiddleware.js";
+
+const router = express.Router();
 
 router.get(
   "/verify-email/:token",
   verifyEmail
 );
-router.post("/register", register);
+
 router.post("/login", login);
-router.get("/profile", protect, getProfile);
+
+router.get(
+  "/profile",
+  protect,
+  getProfile
+);
+
 router.get(
   "/admin",
   protect,
   authorize("admin"),
   getProfile
 );
-router.post("/refresh-token", refreshToken);
-router.post("/logout", logout);
-router.post("/forgot-password", forgotPassword);
+
+router.post(
+  "/refresh-token",
+  refreshToken
+);
+
+router.post(
+  "/logout",
+  logout
+);
+
+router.post(
+  "/forgot-password",
+  forgotPassword
+);
+
 router.post(
   "/reset-password/:token",
   resetPassword
 );
+
 router.post(
   "/resend-verification-email",
   resendVerificationEmail
 );
 
+router.post(
+  "/change-password",
+  protect,
+  changePassword
+);
+
+router.get(
+  "/verify-email-change/:token",
+  verifyEmailChange
+);
+
+router.post(
+  "/change-email",
+  protect,
+  changeEmail
+);
 
 
-module.exports = router;
+export default router;

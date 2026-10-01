@@ -1,3 +1,11 @@
+/**
+ * @file index.js
+ * @description Initializes the legacy Sequelize model registry.
+ *
+ * Responsibilities:
+ * - Load model definitions and associate related models.
+ * - Export the Sequelize instance and registered models.
+ */
 'use strict';
 
 const fs = require('fs');

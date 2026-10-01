@@ -34,7 +34,7 @@
   text-decoration: none;
   color: #3525cd;
   font-size: var(--text-xl);
-  font-weight: 700;
+  font-weight: var(--weight-bold);
   font-family: var(--font-family);
 }
 
@@ -87,7 +87,7 @@
   border-radius: 6px;
   cursor: pointer;
   font-size: var(--text-md);
-  font-weight: 600;
+  font-weight: var(--weight-medium);
   transition: 0.3s;
   font-family: var(--font-family);
 }
@@ -190,7 +190,7 @@
   }
 
   .logo a {
-    font-size: 1.3rem;
+    font-size: var(--text-xl);
   }
 
   .logo-icon {
@@ -205,7 +205,17 @@
   .primary-btn {
     width: 200px;
     padding: 12px;
-    font-size: 0.95rem;
+    font-size: var(--text-md);
   }
 
+}
+
+.logo a {
+  font-size: 22px;
+}
+
+.nav-links a,
+.login-btn,
+.primary-btn {
+  font-size: 16px;
 }

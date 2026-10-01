@@ -1,3 +1,11 @@
+/**
+ * @file Navbar.jsx
+ * @description Renders public-site navigation and authentication actions.
+ *
+ * Responsibilities:
+ * - Provide links to homepage sections and account routes.
+ * - Toggle the responsive navigation menu.
+ */
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
@@ -13,7 +21,6 @@ function Navbar() {
     <header className="navbar">
       <div className="navbar-container">
 
-        {/* Logo */}
         <div className="logo">
           <FaGraduationCap className="logo-icon" />
           <Link to="/" onClick={closeMenu}>
@@ -21,7 +28,6 @@ function Navbar() {
           </Link>
         </div>
 
-        {/* Hamburger */}
         <div
           className="menu-icon"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -29,7 +35,6 @@ function Navbar() {
           {menuOpen ? <FaTimes /> : <FaBars />}
         </div>
 
-        {/* Navigation */}
         <nav className={menuOpen ? "nav-menu active" : "nav-menu"}>
           <ul className="nav-links">
 
@@ -58,12 +63,6 @@ function Navbar() {
             <Link to="/login" onClick={closeMenu}>
               <button className="login-btn">
                 Login
-              </button>
-            </Link>
-
-            <Link to="/signup" onClick={closeMenu}>
-              <button className="primary-btn">
-                Get Started
               </button>
             </Link>
 

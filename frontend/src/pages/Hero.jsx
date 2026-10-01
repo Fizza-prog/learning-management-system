@@ -1,6 +1,13 @@
+/**
+ * @file Hero.jsx
+ * @description Renders the main headline and visual on the public homepage.
+ *
+ * Responsibilities:
+ * - Introduce the school-management platform.
+ * - Display the dashboard image and key highlights.
+ */
 import "./Hero.css";
 import lmsImage from "../assets/image.png";
-import { Link } from "react-router-dom";
 
 function Hero() {
   return (
@@ -22,20 +29,7 @@ function Hero() {
             communication from a single, secure, and scalable platform built
             for modern educational institutions.
           </p>
-
-          <div className="hero-buttons">
-            <Link to="/signup">
-              <button className="primary-btn">
-                Get Started
-              </button>
-            </Link>
-
-            <button className="secondary-btn">
-              Book a Demo
-            </button>
-          </div>
-
-        </div>
+</div>
 
         <div className="hero-image">
           <img

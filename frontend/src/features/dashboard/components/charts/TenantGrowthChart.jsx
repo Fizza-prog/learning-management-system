@@ -1,3 +1,11 @@
+/**
+ * @file TenantGrowthChart.jsx
+ * @description Visualizes school growth over time for the super-admin dashboard.
+ *
+ * Responsibilities:
+ * - Map monthly tenant data into chart series.
+ * - Render the growth chart and its axes.
+ */
 import {
   ResponsiveContainer,
   LineChart,

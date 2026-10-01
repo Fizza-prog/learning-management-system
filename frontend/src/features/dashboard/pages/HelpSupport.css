@@ -1,0 +1,151 @@
+.help-support-page {
+  width: 100%;
+  padding: 0;
+}
+
+.help-support-header {
+  margin-bottom: 24px;
+}
+
+.help-support-header h1 {
+  margin: 0;
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+}
+
+.help-support-header p {
+  margin: 6px 0 0;
+  color: #666;
+  font-size: var(--text-md);
+}
+
+.faq-section,
+.contact-support-section {
+  width: min(850px, 100%);
+  margin: 0 auto 16px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+}
+
+.faq-section h2,
+.contact-support-header h2 {
+  margin: 0 0 20px;
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faq-item {
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 16px;
+}
+
+.faq-item summary {
+  cursor: pointer;
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+}
+
+.faq-item p {
+  margin: 12px 0 0;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.contact-support-header {
+  margin-bottom: 24px;
+}
+
+.contact-support-header p {
+  margin: 6px 0 0;
+  color: #6b7280;
+  font-size: var(--text-md);
+}
+
+.support-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  min-height: 42px;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font: inherit;
+  box-sizing: border-box;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.support-form button:not(.dashboard-header-button) {
+  display: block;
+  width: 60%;
+  margin: 0 auto;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: var(--text-md);
+  font-weight: var(--weight-medium);
+}
+
+.support-form .dashboard-header-button {
+  display: block;
+  width: 60%;
+  margin: 0 auto;
+}
+
+.support-form button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+@media (max-width: 700px) {
+  .help-support-page {
+    padding: 0;
+  }
+
+  .faq-section,
+  .contact-support-section {
+    padding: 20px;
+  }
+
+  .support-form button:not(.dashboard-header-button),
+  .support-form .dashboard-header-button {
+    width: 80%;
+  }
+}

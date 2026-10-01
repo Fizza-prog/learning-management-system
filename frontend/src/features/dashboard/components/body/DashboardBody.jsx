@@ -1,25 +1,25 @@
+/**
+ * @file DashboardBody.jsx
+ * @description Composes the main data visualizations on the super-admin dashboard.
+ *
+ * Responsibilities:
+ * - Render recent-school records.
+ * - Render school tenant-growth data.
+ */
 import RecentSchools from "../table/RecentSchools";
 import TenantGrowthChart from "../charts/TenantGrowthChart";
 
-import {
-  superAdminTenantGrowth,
-  superAdminRecentSchools,
-} from "../../config/superAdminConfig";
-
-
 import "./DashboardBody.css";
 
-function DashboardBody() {
+function DashboardBody({
+  recentSchools,
+  tenantGrowth,
+}) {
   return (
     <section className="dashboard-body">
-      {/* <RecentSchools schools={schoolAdminSchools} />
+      <RecentSchools schools={recentSchools} />
 
-      <TenantGrowthChart /> */}
-      <RecentSchools schools={superAdminRecentSchools} />
-
-      <TenantGrowthChart
-        data={superAdminTenantGrowth}
-      />
+      <TenantGrowthChart data={tenantGrowth} />
     </section>
   );
 }

@@ -1,3 +1,11 @@
+/**
+ * @file HowItWorks.jsx
+ * @description Explains the product workflow in homepage steps.
+ *
+ * Responsibilities:
+ * - Define the displayed onboarding steps.
+ * - Render the How It Works section.
+ */
 import "./HowItWorks.css";
 
 const steps = [
