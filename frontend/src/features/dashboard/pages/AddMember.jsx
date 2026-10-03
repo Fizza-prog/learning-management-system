@@ -8,6 +8,7 @@
  */
 import { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useAuth } from "../../auth/context/AuthContext";
 import {
   createUser,
@@ -29,9 +30,11 @@ function AddMember() {
   const isEditMode = Boolean(editUserId);
 
   const [schools, setSchools] = useState([]);
-  const [message, setMessage] = useState("");
+  const [originalRole, setOriginalRole] = useState("");
+  const [originalSchoolId, setOriginalSchoolId] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const isSuperAdmin = user?.role === "super_admin";
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -75,6 +78,8 @@ function AddMember() {
         const response = await getUserById(editUserId);
 
         const existingUser = response.data;
+        setOriginalRole(existingUser.role || "");
+        setOriginalSchoolId(existingUser.schoolId || "");
 
         setFormData({
           firstName: existingUser.firstName || "",
@@ -111,7 +116,6 @@ function AddMember() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    setMessage("");
     setError("");
 
     if (!isEditMode && formData.password.length < 8) {
@@ -127,24 +131,27 @@ function AddMember() {
           firstName: formData.firstName,
           lastName: formData.lastName,
           email: formData.email,
-          role: formData.role,
-          schoolId: formData.schoolId,
         };
 
+        if (isSuperAdmin) {
+          if (formData.role !== originalRole) {
+            updateData.role = formData.role;
+          }
+
+          if (formData.schoolId !== originalSchoolId) {
+            updateData.schoolId = formData.schoolId;
+          }
+        }
+
         await updateUser(editUserId, updateData);
-
-        setMessage("User updated successfully.");
-
-        setTimeout(() => {
-          navigate("/dashboard/members");
-        }, 1000);
+        toast.success("User updated successfully.");
+        navigate("/dashboard/members");
 
         return;
       }
 
       const response = await createUser(formData);
-
-      setMessage(
+      toast.success(
         response.message || "User created successfully."
       );
 
@@ -196,18 +203,14 @@ function AddMember() {
           <p>
             {isEditMode
               ? "Update member information."
-              : "Create a new teacher, student, or admin account."}
+              : isSuperAdmin
+              ? "Create a new admin account."
+              : "Create a new teacher or student account."}
           </p>
         </div>
       </div>
 
       <div className="add-member-container">
-        {message && (
-          <p className="success-message">
-            {message}
-          </p>
-        )}
-
         {error && (
           <p className="error-message">
             {error}
@@ -279,25 +282,24 @@ function AddMember() {
               name="role"
               value={formData.role}
               onChange={handleChange}
+              disabled={isEditMode && !isSuperAdmin}
             >
-              {user?.role === "super_admin" && (
-                <>
-                  <option value="admin">Admin</option>
-                  <option value="teacher">Teacher</option>
-                  <option value="student">Student</option>
-                </>
-              )}
-
-              {user?.role === "admin" && (
-                <>
-                  <option value="teacher">Teacher</option>
-                  <option value="student">Student</option>
-                </>
-              )}
+              {(isEditMode && !isSuperAdmin
+                ? [formData.role]
+                : isSuperAdmin
+                ? isEditMode
+                  ? ["admin", "teacher", "student", ...(formData.role === "super_admin" ? ["super_admin"] : [])]
+                  : ["admin"]
+                : ["teacher", "student"]
+              ).map((role) => (
+                <option key={role} value={role}>
+                  {role.replace("_", " ").replace(/\b\w/g, (letter) => letter.toUpperCase())}
+                </option>
+              ))}
             </select>
           </div>
 
-          {user?.role === "super_admin" && (
+          {isSuperAdmin && (
             <div className="form-group">
               <label>School</label>
 

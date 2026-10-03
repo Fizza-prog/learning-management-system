@@ -225,7 +225,7 @@ const forgotPasswordService = async (email) => {
     <a
       href="${resetLink}"
       style="
-        background-color: #4f46e5;
+        background-color: #2563eb;
         color: white;
         padding: 12px 20px;
         text-decoration: none;

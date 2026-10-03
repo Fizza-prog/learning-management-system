@@ -8,6 +8,7 @@
  */
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import {
   FiMoreVertical,
   FiMail,
@@ -123,6 +124,7 @@ function Student() {
       setError("");
 
       await deleteUser(deleteStudentTarget.id);
+      toast.success("Student deleted successfully.");
 
       setStudents((currentStudents) =>
         currentStudents.filter(

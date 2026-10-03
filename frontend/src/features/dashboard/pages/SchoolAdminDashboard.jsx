@@ -149,7 +149,7 @@ function SchoolAdminDashboard() {
       return {
         ...item,
         value: `$${Number(
-          dashboardStats.monthToDate
+          dashboardStats.feeCollectionMonthToDate || 0
         ).toLocaleString(undefined, {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,

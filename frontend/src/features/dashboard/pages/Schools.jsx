@@ -9,6 +9,7 @@
 import { useEffect, useState, useRef } from "react";
 
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import {
   FiMoreVertical,
@@ -314,6 +315,9 @@ function Schools() {
         deleteTarget.id
       );
 
+      toast.success(
+        response.message || "School deleted successfully."
+      );
       setDeleteTarget(null);
 
       const schoolLeavesFilteredResults =

@@ -104,11 +104,14 @@ function Announcements() {
 
   useEffect(() => {
     if (!isSuperAdmin) return;
+  getSchools()
+  .then((response) => {
+    const activeSchools = (response.data?.schools || []).filter(
+      (school) => school.isActive
+    );
 
-    getSchools()
-      .then((response) => {
-        setSchools(response.data?.schools || []);
-      })
+    setSchools(activeSchools);
+   })
       .catch((requestError) => {
         toast.error(
           requestError.response?.data?.message ||

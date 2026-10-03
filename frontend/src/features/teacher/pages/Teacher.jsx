@@ -9,6 +9,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import {
   FiMoreVertical,
@@ -126,6 +127,7 @@ function Teacher() {
       setError("");
 
       await deleteUser(deleteTeacherTarget.id);
+      toast.success("Teacher deleted successfully.");
 
       setTeachers((currentTeachers) =>
         currentTeachers.filter(

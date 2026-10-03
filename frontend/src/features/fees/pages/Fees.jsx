@@ -57,6 +57,7 @@ function Fees() {
   const [fees, setFees] = useState([]);
   const [schools, setSchools] = useState([]);
   const [students, setStudents] = useState([]);
+  const activeSchools = schools.filter((school) => school.isActive);
 
   const [page, setPage] = useState(1);
 
@@ -81,6 +82,13 @@ function Fees() {
   const [openMenuId, setOpenMenuId] = useState(null);
 
   const [deleteTarget, setDeleteTarget] = useState(null);
+
+  const editingInactiveSchool = editingFee
+    ? schools.find(
+        (school) =>
+          school.id === form.schoolId && !school.isActive
+      )
+    : null;
 
   // --------------------------------
   // CLOSE ACTION MENU ON OUTSIDE CLICK
@@ -444,7 +452,7 @@ function Fees() {
               All schools
             </option>
 
-            {schools.map((school) => (
+            {activeSchools.map((school) => (
               <option
                 key={school.id}
                 value={school.id}
@@ -738,30 +746,38 @@ function Fees() {
                 <label>
                   School
 
-                  <select
-                    required
-                    value={form.schoolId}
-                    onChange={(event) =>
-                      setForm((current) => ({
-                        ...current,
-                        schoolId:
-                          event.target.value,
-                      }))
-                    }
-                  >
-                    <option value="">
-                      Select school
-                    </option>
-
-                    {schools.map((school) => (
-                      <option
-                        key={school.id}
-                        value={school.id}
-                      >
-                        {school.name}
+                  {editingInactiveSchool ? (
+                    <input
+                      type="text"
+                      value={`${editingInactiveSchool.name} (inactive)`}
+                      disabled
+                    />
+                  ) : (
+                    <select
+                      required
+                      value={form.schoolId}
+                      onChange={(event) =>
+                        setForm((current) => ({
+                          ...current,
+                          schoolId:
+                            event.target.value,
+                        }))
+                      }
+                    >
+                      <option value="">
+                        Select school
                       </option>
-                    ))}
-                  </select>
+
+                      {activeSchools.map((school) => (
+                          <option
+                            key={school.id}
+                            value={school.id}
+                          >
+                            {school.name}
+                          </option>
+                        ))}
+                    </select>
+                  )}
                 </label>
               )}
 

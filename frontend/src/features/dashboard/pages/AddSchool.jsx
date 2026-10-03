@@ -9,6 +9,7 @@
 
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import {
   createSchool,
@@ -34,7 +35,6 @@ function AddSchool() {
   });
 
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
   // Fetch existing school when editing
@@ -82,7 +82,6 @@ function AddSchool() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    setMessage("");
     setError("");
 
     try {
@@ -91,20 +90,15 @@ function AddSchool() {
       // EDIT SCHOOL
       if (isEditMode) {
         await updateSchool(editSchoolId, formData);
-
-        setMessage("School updated successfully.");
-
-        setTimeout(() => {
-          navigate("/dashboard/schools");
-        }, 1000);
+        toast.success("School updated successfully.");
+        navigate("/dashboard/schools");
 
         return;
       }
 
       // CREATE SCHOOL
       const response = await createSchool(formData);
-
-      setMessage(
+      toast.success(
         response.message || "School created successfully."
       );
 
@@ -152,12 +146,6 @@ function AddSchool() {
       </div>
 
       <div className="add-school-container">
-        {message && (
-          <p className="success-message">
-            {message}
-          </p>
-        )}
-
         {error && (
           <p className="error-message">
             {error}

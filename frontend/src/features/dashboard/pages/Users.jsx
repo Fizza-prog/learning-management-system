@@ -10,6 +10,8 @@
 import { useEffect, useState, useRef } from "react";
 
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useAuth } from "../../auth/context/AuthContext";
 
 import {
   FiMoreVertical,
@@ -30,6 +32,7 @@ import "../components/adminList.css";
 
 function Users() {
   const navigate = useNavigate();
+  const { user: currentUser } = useAuth();
 
   const [users, setUsers] = useState([]);
   const [schools, setSchools] = useState([]);
@@ -71,8 +74,12 @@ function Users() {
   useEffect(() => {
     const fetchSchools = async () => {
       try {
-        const response = await getSchools();
-        setSchools(response.data?.schools || []);
+      const response = await getSchools();
+      const activeSchools = (response.data?.schools || []).filter(
+      (school) => school.isActive
+);
+
+setSchools(activeSchools);
       } catch (error) {
         console.error("Failed to fetch schools:", error);
       }
@@ -157,6 +164,7 @@ function Users() {
       setError("");
 
       await deleteUser(deleteUserTarget.id);
+      toast.success("User deleted successfully.");
 
       setUsers((currentUsers) =>
         currentUsers.filter(
@@ -414,55 +422,57 @@ function Users() {
                   </td>
 
                   <td className="actions-cell">
-                    <div
-                      className="action-menu"
-                      ref={
-                        openMenu === user.id
-                          ? menuRef
-                          : null
-                      }
-                    >
-                      <button
-                        type="button"
-                        className="action-menu-button"
-                        onClick={() =>
-                          setOpenMenu(
-                            openMenu === user.id
-                              ? null
-                              : user.id
-                          )
-                        }
-                        aria-label="Open actions"
-                        aria-expanded={
+                    {user.role !== "super_admin" && (
+                      <div
+                        className="action-menu"
+                        ref={
                           openMenu === user.id
+                            ? menuRef
+                            : null
                         }
                       >
-                        <FiMoreVertical />
-                      </button>
+                        <button
+                          type="button"
+                          className="action-menu-button"
+                          onClick={() =>
+                            setOpenMenu(
+                              openMenu === user.id
+                                ? null
+                                : user.id
+                            )
+                          }
+                          aria-label="Open actions"
+                          aria-expanded={
+                            openMenu === user.id
+                          }
+                        >
+                          <FiMoreVertical />
+                        </button>
 
-                      {openMenu === user.id && (
-                        <div className="action-dropdown">
-                          <button
-                            type="button"
-                            onClick={() =>
-                              handleEdit(user.id)
-                            }
-                          >
-                            Edit
-                          </button>
+                        {openMenu === user.id && (
+                          <div className="action-dropdown">
+                            <button
+                              type="button"
+                              onClick={() =>
+                                handleEdit(user.id)
+                              }
+                            >
+                              Edit
+                            </button>
 
-                          <button
-                            type="button"
-                            className="delete-action"
-                            onClick={() =>
-                              handleDeleteUser(user)
-                            }
-                          >
-                            Delete
-                          </button>
-                        </div>
-                      )}
-                    </div>
+                            <button
+                              type="button"
+                              className="delete-action"
+                              onClick={() =>
+                                handleDeleteUser(user)
+                              }
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </td>
                 </tr>
               ))
