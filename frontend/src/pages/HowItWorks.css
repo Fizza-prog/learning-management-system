@@ -14,7 +14,8 @@
 }
 
 .how-container h2 {
-  font-size: 2.5rem;
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
   color: #464555;
   margin-bottom: 16px;
   font-family: var(--font-family);
@@ -25,7 +26,7 @@
   margin: 0 auto 60px;
   color: #6b7280;
   line-height: 1.7;
-  font-size: 1rem;
+  font-size: var(--text-md);
   font-family: var(--font-family);
 }
 
@@ -68,8 +69,8 @@
   background: #3525cd;
 
   color: #fff;
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
   font-family: var(--font-family);
 
   margin-bottom: 20px;
@@ -78,14 +79,15 @@
 .step-card h3 {
   margin-bottom: 14px;
   color: #1b1b24;
-  font-size: 1.3rem;
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
   font-family: var(--font-family);
 }
 
 .step-card p {
   color: #6b7280;
   line-height: 1.7;
-  font-size: 1rem;
+  font-size: var(--text-md);
   font-family: var(--font-family);
 }
 
@@ -99,7 +101,7 @@
   }
 
   .how-container h2 {
-    font-size: 2.2rem;
+    font-size: var(--text-xl);
   }
 
   .steps {
@@ -122,11 +124,11 @@
   }
 
   .how-container h2 {
-    font-size: 2rem;
+    font-size: var(--text-xl);
   }
 
   .how-subtitle {
-    font-size: 0.95rem;
+    font-size: var(--text-md);
     margin-bottom: 40px;
   }
 
@@ -140,11 +142,11 @@
   }
 
   .step-card h3 {
-    font-size: 1.2rem;
+    font-size: var(--text-lg);
   }
 
   .step-card p {
-    font-size: 0.95rem;
+    font-size: var(--text-md);
   }
 }
 
@@ -158,11 +160,11 @@
   }
 
   .how-container h2 {
-    font-size: 1.75rem;
+    font-size: var(--text-xl);
   }
 
   .how-subtitle {
-    font-size: 0.9rem;
+    font-size: var(--text-md);
   }
 
   .step-card {
@@ -172,15 +174,65 @@
   .step-number {
     width: 50px;
     height: 50px;
-    font-size: 1.1rem;
+    font-size: var(--text-lg);
   }
 
   .step-card h3 {
-    font-size: 1.1rem;
+    font-size: var(--text-lg);
   }
 
   .step-card p {
-    font-size: 0.9rem;
+    font-size: var(--text-md);
     line-height: 1.6;
+  }
+}
+
+.how-container h2 {
+  font-size: 30px;
+}
+
+.how-subtitle {
+  font-size: 18px;
+}
+
+.step-number {
+  font-size: 22px;
+}
+
+.step-card h3 {
+  font-size: 20px;
+}
+
+.step-card p {
+  font-size: 16px;
+}
+
+@media (max-width: 992px) {
+  .how-container h2 {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .how-container h2 {
+    font-size: 26px;
+  }
+
+  .how-subtitle {
+    font-size: 17px;
+  }
+
+  .step-card h3 {
+    font-size: 19px;
+  }
+}
+
+@media (max-width: 480px) {
+  .how-container h2 {
+    font-size: 24px;
+  }
+
+  .step-number {
+    font-size: 20px;
   }
 }

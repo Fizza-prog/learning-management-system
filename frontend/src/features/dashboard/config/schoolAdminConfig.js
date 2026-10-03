@@ -1,3 +1,11 @@
+/**
+ * @file schoolAdminConfig.js
+ * @description Defines navigation and sample dashboard data for school administrators.
+ *
+ * Responsibilities:
+ * - Provide school-admin sidebar entries and dashboard headings.
+ * - Provide the statistics and overview data used by the module.
+ */
 export const schoolAdminMenu = [
   {
     id: 1,
@@ -56,15 +64,21 @@ export const schoolAdminMenu = [
   {
     id: 10,
     title: "Settings",
-    path: "/dashboard/settings",
+    path: "/dashboard/account-settings",
     icon: "settings",
+  },
+    {
+    id: 11,
+    title: "Logs",
+    path: "/dashboard/audit-logs",
+    icon: "logs",
   },
 ];
 
 
 export const schoolAdminHeader = {
   title: "Overview",
-  subtitle: "Here's what's happening at EduSphere today.",
+  subtitle: "Here's what's happening at EduLMS today.",
   buttonText: "Add New Member",
 };
 
@@ -94,8 +108,8 @@ export const schoolAdminStats = [
   {
     id: 4,
     title: "Fee Collection (MTD)",
-    value: "$42,500",
-    growth: "+12%",
+    value: "—",
+    growth: "",
     icon: "fees",
   },
 ];

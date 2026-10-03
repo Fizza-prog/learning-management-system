@@ -1,3 +1,11 @@
+/**
+ * @file verificationEmail.js
+ * @description Builds the account email-verification message body.
+ *
+ * Responsibilities:
+ * - Personalize the verification message.
+ * - Include the account verification link.
+ */
 const verificationEmail = (
   firstName,
   verificationLink
@@ -33,4 +41,4 @@ const verificationEmail = (
   `;
 };
 
-module.exports = verificationEmail;
+export default verificationEmail;

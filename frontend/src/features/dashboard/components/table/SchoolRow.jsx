@@ -1,17 +1,36 @@
-import {
-  MdVisibility,
-  MdEdit,
-  MdMoreVert,
-} from "react-icons/md";
+/**
+ * @file SchoolRow.jsx
+ * @description Renders one school record in the recent-schools table.
+ *
+ * Responsibilities:
+ * - Format the school creation date and status.
+ * - Display school, administrator, and student-count values.
+ */
 import "./SchoolRow.css";
+
 function SchoolRow({ school }) {
+  const formatCreatedAt = (createdAt) => {
+    if (!createdAt) {
+      return "-";
+    }
+
+    const date = new Date(createdAt);
+
+    if (Number.isNaN(date.getTime())) {
+      return "-";
+    }
+
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+  };
+
   const getStatusClass = (status) => {
     switch (status) {
       case "Active":
         return "status-active";
-
-      case "Pending":
-        return "status-pending";
 
       case "Suspended":
         return "status-suspended";
@@ -23,37 +42,24 @@ function SchoolRow({ school }) {
 
   return (
     <tr>
-      <td>{school.school}</td>
+      <td>{school.name}</td>
 
       <td>{school.admin}</td>
 
       <td>{school.students}</td>
 
-      <td>{school.plan}</td>
-
       <td>
-        <span className={`status-badge ${getStatusClass(school.status)}`}>
+        <span
+          className={`status-badge ${getStatusClass(
+            school.status
+          )}`}
+        >
+          <span className="status-dot"></span>
           {school.status}
         </span>
       </td>
 
-      <td>{school.createdAt}</td>
-
-      <td>
-        <div className="table-actions">
-          <button>
-            <MdVisibility />
-          </button>
-
-          <button>
-            <MdEdit />
-          </button>
-
-          <button>
-            <MdMoreVert />
-          </button>
-        </div>
-      </td>
+      <td>{formatCreatedAt(school.createdAt)}</td>
     </tr>
   );
 }

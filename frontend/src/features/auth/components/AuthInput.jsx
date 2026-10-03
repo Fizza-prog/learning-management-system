@@ -1,3 +1,11 @@
+/**
+ * @file AuthInput.jsx
+ * @description Renders a reusable labeled input for authentication forms.
+ *
+ * Responsibilities:
+ * - Display input values, labels, and validation feedback.
+ * - Forward input changes to the owning form.
+ */
 import "./AuthInput.css"
 
 function AuthInput({

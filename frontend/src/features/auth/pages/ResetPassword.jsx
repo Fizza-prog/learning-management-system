@@ -1,3 +1,11 @@
+/**
+ * @file ResetPassword.jsx
+ * @description Renders the password-reset form for a verification token.
+ *
+ * Responsibilities:
+ * - Validate new-password and confirmation fields.
+ * - Submit the reset request and return the user to login.
+ */
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AuthInput from "../components/AuthInput";
@@ -37,9 +45,9 @@ function ResetPassword() {
 
     if (!formData.password.trim()) {
       newErrors.password = "Password is required";
-    } else if (formData.password.length < 6) {
+    } else if (formData.password.length < 8) {
       newErrors.password =
-        "Password must be at least 6 characters";
+        "Password must be at least 8 characters";
     }
 
     if (!formData.confirmPassword.trim()) {

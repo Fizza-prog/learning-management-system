@@ -1,22 +1,31 @@
-.status-badge {
-  padding: 6px 12px;
+.recent-schools .status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
   border-radius: 20px;
-  font-size: 14px;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  white-space: nowrap;
 }
 
-.status-active {
-  background: #d1fae5;
-  color: #047857;
+.recent-schools .status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
 }
 
-.status-pending {
-  background: #fef3c7;
-  color: #b45309;
+.recent-schools .status-active {
+  background: #e8f5e9;
+  color: #2e7d32;
 }
 
-.status-suspended {
-  background: #fee2e2;
-  color: #b91c1c;
+.recent-schools .status-pending,
+.recent-schools .status-suspended {
+  background: #f1f1f1;
+  color: #757575;
 }
 
 .table-actions {

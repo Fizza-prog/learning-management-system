@@ -1,4 +1,12 @@
-const nodemailer = require("nodemailer");
+/**
+ * @file sendEmail.js
+ * @description Sends application email through the configured SMTP provider.
+ *
+ * Responsibilities:
+ * - Configure the Nodemailer transport from environment values.
+ * - Deliver messages requested by account and support services.
+ */
+import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -21,4 +29,4 @@ const sendEmail = async (
   });
 };
 
-module.exports = sendEmail;
+export default sendEmail;

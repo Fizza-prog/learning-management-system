@@ -1,0 +1,114 @@
+.add-school-page {
+  width: 100%;
+}
+
+.add-school-container {
+  width: min(700px, 100%);
+  margin: 0 auto;
+  padding: 24px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+}
+
+.add-school-container h1 {
+  margin-bottom: 6px;
+}
+
+.add-school-container > p {
+  margin-bottom: 24px;
+}
+
+.add-school-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.add-school-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.add-school-form .form-group label {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+}
+
+.add-school-form .form-group input,
+.add-school-form .form-group textarea {
+  min-height: 42px;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font: inherit;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.add-school-form .form-group input:focus,
+.add-school-form .form-group textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.add-school-form .form-group textarea {
+  resize: vertical;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 2px;
+}
+
+.add-school-form button:not(.dashboard-header-button) {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font: inherit;
+}
+
+.add-school-form button[type="submit"]:not(.dashboard-header-button) {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.add-school-form button[type="submit"]:not(.dashboard-header-button):hover {
+  background: #1d4ed8;
+}
+
+.add-school-form .cancel-button {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.add-school-form .cancel-button:hover {
+  background: #d1d5db;
+}
+
+.add-school-form .dashboard-header-button {
+  margin-right: 0;
+}
+
+.add-school-form button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.success-message {
+  margin-bottom: 16px;
+}
+
+.error-message {
+  margin-bottom: 16px;
+}
+
+@media (max-width: 600px) {
+  .add-school-container {
+    padding: 20px;
+  }
+}

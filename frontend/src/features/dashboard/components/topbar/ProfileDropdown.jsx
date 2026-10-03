@@ -1,119 +1,150 @@
+/**
+ * @file ProfileDropdown.jsx
+ * @description Provides the dashboard account menu in the top bar.
+ *
+ * Responsibilities:
+ * - Display the signed-in user's profile actions.
+ * - Manage menu visibility and logout behavior.
+ */
 import { useState, useRef, useEffect } from "react";
-import { MdAccountCircle } from "react-icons/md";
 import {
-    FaUser,
-    FaCog,
-    FaLock,
-    FaQuestionCircle,
-    FaSignOutAlt,
+  FaUser,
+  FaCog,
+  FaLock,
+  FaQuestionCircle,
+  FaSignOutAlt,
 } from "react-icons/fa";
-import './ProfileDropdown.css'
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../auth/context/AuthContext";
-import { logoutUser } from "../../../../api/authApi";
+import "./ProfileDropdown.css";
+
 export default function TopbarUser() {
-    const [open, setOpen] = useState(false);
-    const dropdownRef = useRef(null);
-    const navigate = useNavigate();
-    const { logout, user } = useAuth();
-    const userInitial = user?.firstName?.charAt(0).toUpperCase() || "U";
+  const [open, setOpen] = useState(false);
 
-    console.log(user)
+  const dropdownRef = useRef(null);
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (
-                dropdownRef.current &&
-                !dropdownRef.current.contains(event.target)
-            ) {
-                setOpen(false);
-            }
-        };
+  const { logout, user } = useAuth();
 
-        document.addEventListener("mousedown", handleClickOutside);
+  const userInitial =
+    user?.firstName?.charAt(0).toUpperCase() || "U";
 
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, []);
-
-
-
-    const handleLogout = async () => {
-        try {
-            const refreshToken = localStorage.getItem("refreshToken");
-
-            if (refreshToken) {
-                await logoutUser(refreshToken);
-            }
-        } catch (error) {
-            console.error(error);
-        } finally {
-            logout();
-
-            localStorage.removeItem("accessToken");
-            localStorage.removeItem("refreshToken");
-
-            navigate("/login");
-        }
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target)
+      ) {
+        setOpen(false);
+      }
     };
 
-    return (
-        <div className="topbar-user" ref={dropdownRef}>
-            <div
-                className="user-avatar"
-                onClick={() => setOpen(!open)}
-            >
-                {userInitial}
-            </div>
+    document.addEventListener("mousedown", handleClickOutside);
 
-            {open && (
-                <div className="profile-dropdown">
-                    <div className="profile-header">
-                        <h4>
-                            {user?.firstName} {user?.lastName}
-                        </h4>
+    return () => {
+      document.removeEventListener(
+        "mousedown",
+        handleClickOutside
+      );
+    };
+  }, []);
 
-                        <p>
-                            {user?.role
-                                ?.replace("_", " ")
-                                .replace(/\b\w/g, (char) => char.toUpperCase())}
-                        </p>
-                    </div>
+  const handleNavigation = (path) => {
+    setOpen(false);
+    navigate(path);
+  };
 
-                    <div className="dropdown-divider"></div>
+  const handleLogout = async () => {
+    setOpen(false);
+    await logout();
+    navigate("/login");
+  };
 
-                    <button className="dropdown-item">
-                        <FaUser />
-                        <span>My Profile</span>
-                    </button>
+  return (
+    <div className="topbar-user" ref={dropdownRef}>
+      <div
+        className="user-avatar"
+        onClick={() => setOpen(!open)}
+      >
+        {userInitial}
+      </div>
 
-                    <button className="dropdown-item">
-                        <FaCog />
-                        <span>Account Settings</span>
-                    </button>
+      {open && (
+        <div className="profile-dropdown">
 
-                    <button className="dropdown-item">
-                        <FaLock />
-                        <span>Change Password</span>
-                    </button>
+          <div className="profile-header">
+            <h4>
+              {user?.firstName} {user?.lastName}
+            </h4>
 
-                    <button className="dropdown-item">
-                        <FaQuestionCircle />
-                        <span>Help & Support</span>
-                    </button>
+            <p>
+              {user?.role
+                ?.replace("_", " ")
+                .replace(/\b\w/g, (char) =>
+                  char.toUpperCase()
+                )}
+            </p>
+          </div>
 
-                    <div className="dropdown-divider"></div>
+          <div className="dropdown-divider"></div>
 
-                    <button
-                        className="dropdown-item logout"
-                        onClick={handleLogout}
-                    >
-                        <FaSignOutAlt />
-                        <span>Logout</span>
-                    </button>
-                </div>
-            )}
+          <button
+            type="button"
+            className="dropdown-item"
+            onClick={() =>
+              handleNavigation("/dashboard/profile")
+            }
+          >
+            <FaUser />
+            <span>My Profile</span>
+          </button>
+
+          <button
+            type="button"
+            className="dropdown-item"
+            onClick={() =>
+              handleNavigation("/dashboard/account-settings")
+            }
+          >
+            <FaCog />
+            <span>Account Settings</span>
+          </button>
+
+          <button
+            type="button"
+            className="dropdown-item"
+            onClick={() =>
+              handleNavigation("/dashboard/change-password")
+            }
+          >
+            <FaLock />
+            <span>Change Password</span>
+          </button>
+
+          <button
+            type="button"
+            className="dropdown-item"
+            onClick={() =>
+              handleNavigation("/dashboard/help-support")
+            }
+          >
+            <FaQuestionCircle />
+            <span>Help & Support</span>
+          </button>
+
+          <div className="dropdown-divider"></div>
+
+          <button
+            type="button"
+            className="dropdown-item logout"
+            onClick={handleLogout}
+          >
+            <FaSignOutAlt />
+            <span>Logout</span>
+          </button>
+
         </div>
-    );
+      )}
+    </div>
+  );
 }

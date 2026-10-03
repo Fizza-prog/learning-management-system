@@ -1,4 +1,10 @@
-import { MdAdd } from "react-icons/md";
+/**
+ * @file DashboardHeader.jsx
+ * @description Renders the title and subtitle shared by dashboard pages.
+ *
+ * Responsibilities:
+ * - Display the supplied dashboard heading and supporting text.
+ */
 import './DashboardHeader.css'
 
 function DashboardHeader({
@@ -8,7 +14,6 @@ function DashboardHeader({
 }) {
   return (
     <section className="dashboard-header">
-      {/* Left Section */}
       <div className="dashboard-header-content">
         <h1 className="dashboard-header-title">
           {title}
@@ -19,11 +24,6 @@ function DashboardHeader({
         </p>
       </div>
 
-      {/* Right Section */}
-      <button className="dashboard-header-button">
-        <MdAdd />
-        <span>{buttonText}</span>
-      </button>
     </section>
   );
 }

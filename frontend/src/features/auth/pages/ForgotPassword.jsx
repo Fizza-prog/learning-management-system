@@ -1,3 +1,11 @@
+/**
+ * @file ForgotPassword.jsx
+ * @description Renders the request form for password-reset email.
+ *
+ * Responsibilities:
+ * - Validate the submitted email address.
+ * - Request a password-reset link and report the result.
+ */
 import { useState } from "react";
 import AuthInput from "../components/AuthInput";
 import { validateForgotPassword } from "../services/validation";

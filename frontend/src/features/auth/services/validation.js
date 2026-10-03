@@ -1,3 +1,11 @@
+/**
+ * @file validation.js
+ * @description Validates the frontend authentication form values.
+ *
+ * Responsibilities:
+ * - Check login and signup credentials.
+ * - Validate the forgot-password email field.
+ */
 export function validateLogin(formData) {
   const errors = {};
 
@@ -9,8 +17,8 @@ export function validateLogin(formData) {
 
   if (!formData.password.trim()) {
     errors.password = "Password is required";
-  } else if (formData.password.length < 6) {
-    errors.password = "Password must be at least 6 characters";
+  } else if (formData.password.length < 8) {
+    errors.password = "Password must be at least 8 characters";
   }
 
   return errors;
@@ -35,8 +43,8 @@ export function validateSignup(formData) {
 
   if (!formData.password.trim()) {
     errors.password = "Password is required";
-  } else if (formData.password.length < 6) {
-    errors.password = "Password must be at least 6 characters";
+  } else if (formData.password.length < 8) {
+    errors.password = "Password must be at least 8 characters";
   }
 
   if (!formData.confirmPassword.trim()) {

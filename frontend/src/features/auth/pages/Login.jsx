@@ -1,3 +1,11 @@
+/**
+ * @file Login.jsx
+ * @description Renders the user login form and authentication flow.
+ *
+ * Responsibilities:
+ * - Validate and submit login credentials.
+ * - Store the returned session data and navigate by user role.
+ */
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthInput from "../components/AuthInput";
@@ -29,48 +37,49 @@ function Login() {
     }));
 
     // Remove error as user types
-    setErrors((prevErrors) => ({
+      setErrors((prevErrors) => ({
       ...prevErrors,
       [name]: "",
     }));
   }
 
-  async function handleSubmit(event) {
-    event.preventDefault();
+ async function handleSubmit(event) {
+  event.preventDefault();
 
-    const validationErrors = validateLogin(formData);
+  const validationErrors = validateLogin(formData);
 
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
+  if (Object.keys(validationErrors).length > 0) {
+    setErrors(validationErrors);
 
-      Object.values(validationErrors).forEach((message) => {
-        toast.error(message);
-      });
+    Object.values(validationErrors).forEach((message) => {
+      toast.error(message);
+    });
 
-      return;
-    }
+    return;
+  }
 
-    setErrors({});
+  setErrors({});
 
-    try {
-      const response = await loginUser(formData);
+  try {
+    const response = await loginUser(formData);
 
-      const { user, accessToken, refreshToken } = response.data;
+    const { data } = response;
 
-      login(user, accessToken);
+    const { accessToken, ...userData } = data;
 
-      localStorage.setItem("refreshToken", refreshToken);
+    login(userData, accessToken);
 
-      toast.success(response.message);
+    toast.success(response.message);
 
-      navigate("/dashboard");
-    } catch (error) {
-      console.error(error);
+    navigate("/dashboard");
+  } catch (error) {
+    console.error(error);
 
-      toast.error(
-        error.response?.data?.message || "Login failed."
-      );
-    }}
+    toast.error(
+      error.response?.data?.message || "Login failed."
+    );
+  }
+}
 
     return (
       <div className="auth-page">

@@ -1,3 +1,10 @@
+/**
+ * @file StatsGrid.jsx
+ * @description Arranges dashboard statistics into a responsive card grid.
+ *
+ * Responsibilities:
+ * - Render one statistics card for each supplied metric.
+ */
 import StatsCard from "./StatsCard";
 import "./StatsGrid.css";
 function StatsGrid({ stats }) {

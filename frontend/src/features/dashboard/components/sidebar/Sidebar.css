@@ -15,18 +15,29 @@
 
 .sidebar-logo {
   margin-bottom: 35px;
+  margin-left: 11px;
 }
 
 .sidebar-logo h2 {
   color: var(--primary-color);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sidebar-logo-icon {
+  color: var(--primary-color);
   font-size: 1.6rem;
-  font-weight: 700;
 }
 
 .sidebar-logo p {
-  margin-top: 6px;
   color: var(--text-light);
-  font-size: 0.9rem;
+  font-size: var(--text-xs);
 }
 
 /* ===========================
@@ -70,8 +81,8 @@
 }
 
 .sidebar-title {
-  font-size: 0.95rem;
-  font-weight: 500;
+  font-size: var(--text-md);
+  font-weight: var(--weight-medium);
 }
 
 /* ===========================
@@ -111,8 +122,8 @@
 
   color: #64748B;
 
-  font-size: 0.95rem;
-  font-weight: 500;
+  font-size: var(--text-md);
+  font-weight: var(--weight-medium);
 
   transition: all 0.25s ease;
 }
@@ -140,4 +151,37 @@
 .sidebar-add-member:active,
 .sidebar-logout:active {
   transform: scale(0.98);
+}
+
+.sidebar-add-member{
+  color: var(--text-dark);
+}
+
+.sidebar-action {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 12px 16px;
+
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  color: var(--text-dark);
+
+  font-size: var(--text-md);
+  font-weight: var(--weight-medium);
+
+  transition: all 0.25s ease;
+
+  margin: 0;
+}
+
+.sidebar-action:hover {
+  background: #EEF2FF;
+  color: #4F46E5;
 }

@@ -1,3 +1,11 @@
+/**
+ * @file Features.jsx
+ * @description Presents the product feature list on the public homepage.
+ *
+ * Responsibilities:
+ * - Define the feature content displayed to visitors.
+ * - Render the feature cards and section heading.
+ */
 import "./Features.css";
 
 const features = [

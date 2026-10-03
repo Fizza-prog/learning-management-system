@@ -1,3 +1,10 @@
+/**
+ * @file LandingPage.jsx
+ * @description Composes the public homepage content sections.
+ *
+ * Responsibilities:
+ * - Render the hero, features, benefits, and workflow sections.
+ */
 import Navbar from "./Navbar";
 import Hero from "./Hero";
 import Features from "./Features";

@@ -1,3 +1,10 @@
+/**
+ * @file StatsCard.jsx
+ * @description Renders one labeled statistic tile for dashboard summaries.
+ *
+ * Responsibilities:
+ * - Display a metric title, value, icon, and optional growth indicator.
+ */
 import {
   MdSchool,
   MdGroups,
@@ -7,6 +14,7 @@ import {
   MdFactCheck,
   MdPayments,
 } from "react-icons/md";
+
 import "./StatsCard.css";
 
 const iconMap = {
@@ -14,27 +22,31 @@ const iconMap = {
   students: MdGroups,
   revenue: MdAttachMoney,
   approval: MdPendingActions,
-
   teachers: MdPerson,
   attendance: MdFactCheck,
   fees: MdPayments,
 };
 
 function StatsCard({ title, value, growth, icon }) {
- const Icon = iconMap[icon] || MdSchool;
-  const isPositive = growth.startsWith("+");
+  const Icon = iconMap[icon] || MdSchool;
+
+  const isPositive =
+    growth && growth.startsWith("+");
 
   return (
     <div className="stats-card">
       <div className="stats-card-header">
         <Icon className="stats-card-icon" />
 
-        <span
-          className={`stats-card-growth ${isPositive ? "positive" : "negative"
+        {growth && (
+          <span
+            className={`stats-card-growth ${
+              isPositive ? "positive" : "negative"
             }`}
-        >
-          {growth}
-        </span>
+          >
+            {growth}
+          </span>
+        )}
       </div>
 
       <h3 className="stats-card-title">

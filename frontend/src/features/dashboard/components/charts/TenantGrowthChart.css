@@ -7,6 +7,6 @@
 
 .chart-title {
   margin-bottom: 20px;
-  font-size: 20px;
-  font-weight: 600;
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
 }

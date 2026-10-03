@@ -1,4 +1,12 @@
-const jwt = require("jsonwebtoken");
+/**
+ * @file generateToken.js
+ * @description Creates signed access and refresh tokens for user sessions.
+ *
+ * Responsibilities:
+ * - Encode user identity and role claims in access tokens.
+ * - Create refresh tokens with their configured lifetime.
+ */
+import jwt from "jsonwebtoken";
 
 const generateAccessToken = (user) => {
   return jwt.sign(
@@ -27,7 +35,7 @@ const generateRefreshToken = (user) => {
   );
 };
 
-module.exports = {
+export {
   generateAccessToken,
   generateRefreshToken,
 };
